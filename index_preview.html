@@ -4,12 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Log - Raymond Fong How</title>
-
     <!-- <script type="text/javascript" src="assets/js/fading_nav_bar.js"></script> -->
-
-    <!--
-        use: <link rel="stylesheet" href="assets/css">
-    -->
+    <!-- use: <link rel="stylesheet" href="assets/css"> -->
+     
     <link rel="stylesheet" href="assets/css/style-general.css">
     <link rel="stylesheet" href="assets/css/style-fonts.css">
     <link rel="stylesheet" href="assets/css/style-nav.css">
@@ -24,10 +21,10 @@
         <nav class="navbar">
             <a class="brand" href="index.html">
                 <div class="brand_box">
-                    <!-- <img src="assets/images/common/logo-white.png" alt="LOGO"> -->
+                    <img src="assets/images/common/logo-white.png" alt="LOGO">
                     <div class="brand_text">
                         <div>
-                            <p class="title">Log</p>
+                            <p class="title">Log 🪵</p>
                         </div>
                         <div>
                             <p class="tagline">Raymond Fong How</p>
@@ -36,21 +33,20 @@
                 </div>
             </a>
             <div class="nav_blank">
-                
             </div>
             <div class="nav_opt">
-                <a href="albums.html">
-                    <p>Tab 1</p>
+                <a href="coming_soom.html">
+                    <p>Tab A</p>
                 </a>
             </div>
             <div class="nav_opt">
-                <a href="all_works.html">
-                    <p>Tab 2</p>
+                <a href="coming_soom.html">
+                    <p>Tab B</p>
                 </a>
             </div>
             <div class="nav_opt">
-                <a href="about_me.html">
-                    <p>Tab 3</p>
+                <a href="coming_soom.html">
+                    <p>Tab C</p>
                 </a>
             </div>
         </nav>
@@ -60,19 +56,16 @@
         const navEl = document.querySelector('.navbar');
         console.log(navEl);
         window.addEventListener('scroll', () => {
-            if (window. scrollY >= 625) {
+            if (window. scrollY >= 500) {
                 navEl.classList.add("navbar-scrolled")
-            } else if (window. scrollY < 625) {
+            } else if (window. scrollY < 500) {
                 navEl.classList.remove("navbar-scrolled")
             }
         })
     </script>
     <main class="index_main">
-        <section class="intro">
+        <section class="coming_soon">
             <p>Hello World.</p>
-        </section>
-        <section>
-            <br><br><br><br><br><br><br><br>
         </section>
     </main>
 </body>
