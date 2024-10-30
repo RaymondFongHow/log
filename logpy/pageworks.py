@@ -27,21 +27,36 @@ class Page(object):
         lst = sum(lst, [])
         return lst
     
-    def replace_brics(self,mode='preview',target_dir='static/partial_templates/'): # Edit target addr!!!
+    def replace_brics(self,mode='preview',target_dir='static/brics/'): # Edit target addr!!!
         self.mode = mode
-        dup_addr = self.addr.split('.')[0]+'_'+self.mode+'.html'
+        if mode == 'preview':
+            dup_addr = self.addr.split('_')[0]+'_'+self.mode+'.html'
+        if mode == 'publish':
+            dup_addr = self.addr.split('_')[0]+'.html'
         shutil.copyfile(self.addr,dup_addr)
         with open(self.addr) as templ:
             txt_str = templ.read()
-        offset = 0
-        for bric in self.read_brics():
-            str_head = bric[0][0]
-            str_tail = bric[0][1]
-            target_title = bric[1]
-            with open(target_dir+target_title+'.html') as target:
-                rep_str = target.read()
-            txt_str = txt_str[:str_head+offset]+rep_str+txt_str[str_tail+offset:]
-            offset = offset + len(rep_str) - 13 - len(target_title) # <bric></bric> and title removed, thus shorter
-            # print(txt_str)
+        dup_str = ''
+        lst = txt_str.split('<bric>')
+        for i in range(len(lst)):
+            string = lst[i]
+            sublst = string.split('</bric>')
+            if len(sublst) == 1:
+                dup_str += string
+            else:
+                indent = 0
+                n = -1
+                while lst[i-1][n] == ' ':
+                    indent += 1
+                    n -= 1
+                target_title = sublst[0]
+                rem_str = sublst[1]
+                with open(target_dir+target_title+'.html') as target:
+                    add_lst = target.readlines()
+                dup_str += add_lst[0]
+                for ind in range(1,len(add_lst)):
+                    dup_str += ' '*indent
+                    dup_str += add_lst[ind]
+                dup_str += rem_str
         with open(dup_addr,'w') as dup:
-            dup.write(txt_str)
+            dup.write(dup_str) 
