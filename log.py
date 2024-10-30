@@ -1,9 +1,15 @@
 import logpy
 from logpy import gitcmd, pageworks
+import json
 
-# sess = gitcmd.Log()
-# sess.add_remark('General update.')
-# print('\n'*5)
+# Open and read the updates JSON file
+# with open('updates.json', 'r') as file:
+#     data = json.load(file)
+
+
+sess = gitcmd.Log()
+sess.add_remark('General update.')
+print('\n'*5)
 
 index = pageworks.Page('index')
 index.replace_brics()
