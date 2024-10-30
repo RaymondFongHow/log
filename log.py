@@ -6,11 +6,12 @@ from logpy import gitcmd, pageworks
 # print('\n'*5)
 
 index = pageworks.Page('index')
-index.replace_brics(mode='preview')
+index.replace_brics()
 index.replace_brics(mode='publish')
 
 dashboard = pageworks.Page('dashboard')
-dashboard.replace_brics(mode='preview')
+dashboard.replace_brics()
+dashboard.replace_brics(mode='publish')
 
 
 # sess.close()
