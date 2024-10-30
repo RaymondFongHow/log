@@ -9,7 +9,7 @@ print('\n'*5)
 # sess.add_remark('General update.')
 # print('\n'*5)
 
-page = pageworks.Page('dashboard_template.html')
+page = pageworks.Page('index')
 brics = page.read_brics()
 # for bric in brics:
 #     print(bric)

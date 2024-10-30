@@ -1,13 +1,17 @@
-import os, shutil
+import shutil
 
 class Page(object):
 
-    def __init__(self,addr):
+    def __init__(self,title,addr='',templ_dir='static/templates/'):
         # print('Initializing Page')
+        self.title = title
         self.addr = addr
+        self.templ_dir = templ_dir
+        self.templ_addr = templ_dir+self.title+'_template.html'
 
     def read_brics(self):
-        with open(self.addr) as templ:
+        print(self.templ_addr)
+        with open(self.templ_addr) as templ:
             txt_str = templ.read()
         brics_lst = []
         for i in range(len(txt_str)-7):
@@ -19,7 +23,7 @@ class Page(object):
         return brics_lst
     
     def bric_split(self):
-        with open(self.addr) as templ:
+        with open(self.templ_addr) as templ:
             txt_str = templ.read()
         lst = txt_str.split('<bric>')
         for i in range(len(lst)):
@@ -27,14 +31,15 @@ class Page(object):
         lst = sum(lst, [])
         return lst
     
-    def replace_brics(self,mode='preview',target_dir='static/brics/'): # Edit target addr!!!
+    def replace_brics(self,mode='preview',brics_dir='static/brics/'): # Edit target addr!!!
         self.mode = mode
         if mode == 'preview':
-            dup_addr = self.addr.split('_')[0]+'_'+self.mode+'.html'
+            dup_addr = self.addr+self.title+'_'+self.mode+'.html'
         if mode == 'publish':
-            dup_addr = self.addr.split('_')[0]+'.html'
-        shutil.copyfile(self.addr,dup_addr)
-        with open(self.addr) as templ:
+            dup_addr = self.addr+self.title+'.html'
+        print(dup_addr)
+        shutil.copyfile(self.templ_addr,dup_addr)
+        with open(self.templ_addr) as templ:
             txt_str = templ.read()
         dup_str = ''
         lst = txt_str.split('<bric>')
@@ -51,7 +56,7 @@ class Page(object):
                     n -= 1
                 target_title = sublst[0]
                 rem_str = sublst[1]
-                with open(target_dir+target_title+'.html') as target:
+                with open(brics_dir+target_title+'.html') as target:
                     add_lst = target.readlines()
                 dup_str += add_lst[0]
                 for ind in range(1,len(add_lst)):
