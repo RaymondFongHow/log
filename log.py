@@ -16,7 +16,7 @@ brics = page.read_brics()
 # print('\n'*5)
 
 
-page.replace_brics()
+page.replace_brics(mode='publish')
 # for chunk in page.bric_split():
 #     print(chunk)
 print('\n'*5)
