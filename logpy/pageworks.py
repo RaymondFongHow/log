@@ -65,3 +65,26 @@ class Page(object):
                 dup_str += rem_str
         with open(dup_addr,'w') as dup:
             dup.write(dup_str) 
+
+    def bric_construct(self,dict):
+        pass
+
+class Update(object):
+
+    def __init__(self,cat,title,desc):
+        self.cat = cat
+        self.title = title
+        self.desc = desc
+
+    def render(self,addr='static/brics/update.html'):
+        with open(addr) as ud_templ:
+            ud_txt = ud_templ.read()
+        repl_dict = {
+            '{%category%}':self.cat,
+            '{%title%}':self.title,
+            '{%description%}':self.desc
+        }
+        for repl in repl_dict:
+            ud_lst = ud_txt.split(repl)
+            ud_txt = ud_lst[0]+repl_dict[repl]+ud_lst[1]
+        return ud_txt

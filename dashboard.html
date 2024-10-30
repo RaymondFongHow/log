@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="assets/css/style-nav.css">
         <link rel="stylesheet" href="assets/css/style-intro.css">
         <link rel="stylesheet" href="assets/css/style-coming_soon.css">
+        <link rel="stylesheet" href="assets/css/style-dashboard.css">
+        <link rel="stylesheet" href="assets/css/style-learning_update.css">
     </head>
     <body>
         <header>
@@ -38,7 +40,7 @@
                 </div>
                 <div class="nav_opt">
                     <a href="coming_soom.html">
-                        <p>Subjects</p>
+                        <p>Fields</p>
                     </a>
                 </div>
                 <div class="nav_opt">
@@ -60,9 +62,36 @@
                 }
             })
         </script>
-        <main>
-            <section class="coming_soon">
-                <p>Coming Soon</p>
+        <main class="dashboard_main">
+            <section class="page_blank"></section>
+            <section class="page_title">
+                <p>Dashboard</p>
+            </section>
+            <section class="ud_list">
+                <div class="ud_info">
+                    <div class="ud_left">
+                        <div class="ud_date">30</div>
+                        <div class="ud_monthyear">Oct 2024</div>
+                    </div>
+                    <div class="ud_text">
+                        <div class="ud_header">
+                            <p class="ud_cat">
+                                {%category%}
+                            </p>
+                            <p class="ud_title">
+                                {%title%}
+                                <!-- <a href="work_pages/ginkgo-winter.html">
+                                    hyperlink version
+                                </a> -->
+                            </p>
+                        </div>
+                        <div class="ud_description">
+                            <p>
+                                {%description%}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </body>

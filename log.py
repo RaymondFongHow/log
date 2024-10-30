@@ -13,5 +13,9 @@ dashboard = pageworks.Page('dashboard')
 dashboard.replace_brics()
 dashboard.replace_brics(mode='publish')
 
+cat,title,desc = 'CATEGORY','TITLE','DESCRIPTION'
+ud1 = pageworks.Update(cat,title,desc)
+print(ud1.render())
+
 # test
 # sess.close()

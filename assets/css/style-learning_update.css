@@ -1,0 +1,70 @@
+.ud_info {
+    display: flex;
+    align-items: start;
+
+    margin-top: 5vw;
+    margin-bottom: 6vw;
+}
+
+.ud_left {
+    margin-right: 7vw;
+    flex:1.2;
+
+    flex-direction: column;
+}
+
+.ud_date {
+    font-weight: 900;
+    font-size: 5.5vw;
+    /* font-style: italic; */
+    flex:1;
+
+    /* height: 10%;
+    width: 100%; */
+    text-align: center;
+    /* object-fit: contain; */
+}
+
+.ud_monthyear {
+    font-weight: 100;
+    font-size: 1.5vw;
+    /* font-style: italic; */
+    flex: 1;
+/* 
+    height: 100%;
+    width: 100%; */
+    text-align: center;
+    /* object-fit: contain; */
+}
+
+.ud_text {
+    flex: 8;
+
+    padding-top: 1.2vw;
+}
+
+.ud_cat{
+    font-weight: 700;
+    font-size: 1.5vw;
+    font-style: italic;
+
+    margin: 0vw 0vw 0.4vw 0vw;
+}
+
+.ud_title {
+    font-weight: 100;
+    font-size: 2vw;
+
+    margin: 0vw 0vw 0.8vw 0vw;
+}
+
+.ud_description {
+    font-size: 1.5vw;
+    text-align: justify;
+
+    margin: 0vw 0vw;
+}
+
+.ud_description p {
+    margin: 0vw 0vw 0vw 0vw;
+}
