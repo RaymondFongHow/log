@@ -107,9 +107,9 @@ def render_updates(addr='data/updates.json',cal_day_addr='static/brics/cal_day.h
     for cal_date in data:
         cal_day_str_dup = cal_day_str
         month,date = cal_date.split(' ')[0],cal_date.split(' ')[1]
-        print(date,month)
+        # print(date,month)
         date_split = cal_day_str_dup.split('{%date%}')
-        print(cal_day_str_dup)
+        # print(cal_day_str_dup)
         cal_day_str_dup = date_split[0]+date+date_split[1]
         month_split = cal_day_str_dup.split('{%month%}')
         cal_day_str_dup = month_split[0]+month+month_split[1]

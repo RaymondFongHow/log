@@ -1,26 +1,26 @@
 {
-    "Nov 01": [
+    "Oct 30": [
+        {
+        "cat": "Computer Science",
+        "title": "SUCCESS!!!",
+        "desc": "Abracadabra! Constructed a preliminary version of my very own learning logging site hosted at <a href='https://log.raymondfonghow.com'>log.raymondfonghow.com</a>!!!<br><br>#python #html #css #js #git"
+        },
+        {
+        "cat": "Physics",
+        "title": "PHYS 3123 - Lecture",
+        "desc": "Achieved conceptual understanding for the following: net Lorentz force as the difference between a close surface integral of tensor T and the time rate of change of the E.M field momentum; field momentum density; application of the former on a coaxial cable; and a derivation of an expression of E.M. waves in vacuum using Maxwell's Equations.<br><br>#electrodynamics"
+        }
+    ],
+    "Oct 29": [
         {
         "cat": "Physics",
         "title": "PHYS 3143 - Lecture",
-        "desc": "Time-Dependent Schrodinger Equation"
+        "desc": "Achieved conceptual understanding for the following: solving a momentum representation of TDSE and project the solution to the position space; and solving the integral of the exponential of a quadratic function of the independent variable.<br><br>#quantum"
         },
         {
-        "cat": "Mathematics",
-        "title": "MIT 18.02",
-        "desc": "Divergence Theorem"
-        }
-    ],
-    "Oct 30": [
-        {
-        "cat": "Physics",
-        "title": "2 PHYS 3143 - Lecture",
-        "desc": "2 Time-Dependent Schrodinger Equation"
-        },
-        {
-        "cat": "Mathematics",
-        "title": "2 MIT 18.02",
-        "desc": "2 Divergence Theorem"
+        "cat": "Computer Science",
+        "title": "Development of <a href='https://log.raymondfonghow.com'>log.raymondfonghow.com</a>",
+        "desc": "Wrote my own version of webpage rendering kit.<br><br>#python #html #css"
         }
     ]
 }

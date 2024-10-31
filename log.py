@@ -1,6 +1,7 @@
 import logpy
 from logpy import gitcmd, pageworks
 import json
+from datetime import datetime
 
 # Open and read the updates JSON file
 with open('data/updates.json', 'r') as file:
@@ -27,3 +28,5 @@ dashboard.replace_brics(mode='publish')
 
 # test
 # sess.close()
+
+print(f'Process completed at {datetime.now()}')
