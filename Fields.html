@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Log - Raymond Fong How</title>
+        <!-- <script type="text/javascript" src="static/js/fading_nav_bar.js"></script> -->
+        <!-- use: <link rel="stylesheet" href="static/css"> -->
+         
+        <link rel="stylesheet" href="static/css/style-general.css">
+        <link rel="stylesheet" href="static/css/style-fonts.css">
+        <link rel="stylesheet" href="static/css/style-nav.css">
+        <link rel="stylesheet" href="static/css/style-intro.css">
+        <link rel="stylesheet" href="static/css/style-coming_soon.css">
+        <link rel="stylesheet" href="static/css/style-dashboard.css">
+        <link rel="stylesheet" href="static/css/style-update.css">
+        <link rel="stylesheet" href="static/css/style-category_update.css">
+        <link rel="stylesheet" href="static/css/style-cat_list.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <a class="brand" href="index.html">
+                    <div class="brand_box">
+                        <img src="assets/images/common/logo-white.png" alt="LOGO">
+                        <div class="brand_text">
+                            <div>
+                                <p class="title">Log 🪵</p>
+                            </div>
+                            <div>
+                                <p class="tagline">Raymond Fong How</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="nav_blank">
+                </div>
+                <div class="nav_opt">
+                    <a href="Dashboard.html">
+                        <p>Dashboard</p>
+                    </a>
+                </div>
+                <div class="nav_opt">
+                    <a href="Fields.html">
+                        <p>Fields</p>
+                    </a>
+                </div>
+                <div class="nav_opt">
+                    <a href="About Me.html">
+                        <p>About Me</p>
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <script>
+            console.log("hi");
+            const navEl = document.querySelector('.navbar');
+            console.log(navEl);
+            window.addEventListener('scroll', () => {
+                if (window.scrollY >= 200) {
+                    navEl.classList.add("navbar-scrolled")
+                } else if (window. scrollY < 200) {
+                    navEl.classList.remove("navbar-scrolled")
+                }
+            })
+        </script>
+        <main class="dashboard_main">
+            <section class="page_blank"></section>
+            <section class="page_title">
+                <p>Fields of Study</p>
+            </section>
+            <section class="cat_list">
+                <div class='cat_link'><a href='Physics.html'>Physics</a></div>
+                <div class='cat_link'><a href='Computer Science.html'>Computer Science</a></div>
+
+            </section>
+        </main>
+    </body>
+</html>

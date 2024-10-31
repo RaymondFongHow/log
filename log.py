@@ -112,7 +112,15 @@ def build_cat_templ(category,target_dir='static/templates/',mother_templ_addr='s
         print(f'Built {target_title} at log/{target_dir}')
     return mt_str
 
-
+def build_cats_bric(target_dir='static/brics/'): # for displaying categories in Fields
+    bric_str = ''
+    for cat in read_categories():
+        bric_str += f"<div class='cat_link'><a href='{cat}.html'>{cat}</a></div>\n"
+    target_title = 'categories.html'
+    with open(target_dir+target_title,'w') as target:
+        target.write(bric_str)
+        print(f"Built {target_title} at log/{target_dir}")
+    return bric_str
 
 
 render_updates() # category='Dashboard'
@@ -126,12 +134,16 @@ for cat in read_categories():
     render_updates(category=cat)
     print('\n')
 
+build_cats_bric()
+
 page_mode_dict = {
-    'Index'             :'publish',
-    'Dashboard'         :'publish',
-    'Physics'           :'publish',
-    'Mathematics'       :'preview',
-    'Computer Science'  :'publish'
+    'Index'             :   'publish',
+    'Dashboard'         :   'publish',
+    'Fields'            :   'publish',
+    'Physics'           :   'publish',
+    'Mathematics'       :   'preview',
+    'Computer Science'  :   'publish'
+    # 'New Field'         :   'publish'
 }
 
 for title in page_mode_dict:

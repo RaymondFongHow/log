@@ -1,0 +1,15 @@
+.cat_list {
+    margin: 0 12vw;
+}
+
+.cat_list .cat_link {
+    font-weight: 100;
+    font-size: 3vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
