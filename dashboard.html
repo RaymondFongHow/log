@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="static/css/style-intro.css">
         <link rel="stylesheet" href="static/css/style-coming_soon.css">
         <link rel="stylesheet" href="static/css/style-dashboard.css">
-        <link rel="stylesheet" href="static/css/style-learning_update.css">
+        <link rel="stylesheet" href="static/css/style-update.css">
     </head>
     <body>
         <header>
@@ -55,7 +55,7 @@
             const navEl = document.querySelector('.navbar');
             console.log(navEl);
             window.addEventListener('scroll', () => {
-                if (window. scrollY >= 500) {
+                if (window.scrollY >= 500) {
                     navEl.classList.add("navbar-scrolled")
                 } else if (window. scrollY < 500) {
                     navEl.classList.remove("navbar-scrolled")
@@ -70,28 +70,97 @@
             <section class="ud_list">
                 <div class="ud_info">
                     <div class="ud_left">
+                        <div class="ud_date">01</div>
+                        <div class="ud_monthyear">Nov 2024</div>
+                    </div>
+                    <div class="ud_right">
+                                <div class="ud_text">
+                            <div class="ud_header">
+                                <p class="ud_cat">
+                                    Physics
+                                </p>
+                                <p class="ud_title">
+                                    PHYS 3143 - Lecture
+                                    <!-- <a href="work_pages/ginkgo-winter.html">
+                                        hyperlink version
+                                    </a> -->
+                                </p>
+                            </div>
+                            <div class="ud_description">
+                                <p>
+                                    Time-Dependent Schrodinger Equation
+                                </p>
+                            </div>
+                        </div>
+                        <div class="ud_text">
+                            <div class="ud_header">
+                                <p class="ud_cat">
+                                    Mathematics
+                                </p>
+                                <p class="ud_title">
+                                    MIT 18.02
+                                    <!-- <a href="work_pages/ginkgo-winter.html">
+                                        hyperlink version
+                                    </a> -->
+                                </p>
+                            </div>
+                            <div class="ud_description">
+                                <p>
+                                    Divergence Theorem
+                                </p>
+                            </div>
+                        </div>
+                        
+                
+                    </div>
+                </div>
+                <div class="ud_info">
+                    <div class="ud_left">
                         <div class="ud_date">30</div>
                         <div class="ud_monthyear">Oct 2024</div>
                     </div>
-                    <div class="ud_text">
-                        <div class="ud_header">
-                            <p class="ud_cat">
-                                {%category%}
-                            </p>
-                            <p class="ud_title">
-                                {%title%}
-                                <!-- <a href="work_pages/ginkgo-winter.html">
-                                    hyperlink version
-                                </a> -->
-                            </p>
+                    <div class="ud_right">
+                                <div class="ud_text">
+                            <div class="ud_header">
+                                <p class="ud_cat">
+                                    Physics
+                                </p>
+                                <p class="ud_title">
+                                    2 PHYS 3143 - Lecture
+                                    <!-- <a href="work_pages/ginkgo-winter.html">
+                                        hyperlink version
+                                    </a> -->
+                                </p>
+                            </div>
+                            <div class="ud_description">
+                                <p>
+                                    2 Time-Dependent Schrodinger Equation
+                                </p>
+                            </div>
                         </div>
-                        <div class="ud_description">
-                            <p>
-                                {%description%}
-                            </p>
+                        <div class="ud_text">
+                            <div class="ud_header">
+                                <p class="ud_cat">
+                                    Mathematics
+                                </p>
+                                <p class="ud_title">
+                                    2 MIT 18.02
+                                    <!-- <a href="work_pages/ginkgo-winter.html">
+                                        hyperlink version
+                                    </a> -->
+                                </p>
+                            </div>
+                            <div class="ud_description">
+                                <p>
+                                    2 Divergence Theorem
+                                </p>
+                            </div>
                         </div>
+                        
+                
                     </div>
                 </div>
+
             </section>
         </main>
     </body>

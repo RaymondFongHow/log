@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="static/css/style-intro.css">
     <link rel="stylesheet" href="static/css/style-coming_soon.css">
     <link rel="stylesheet" href="static/css/style-dashboard.css">
-    <link rel="stylesheet" href="static/css/style-learning_update.css">
+    <link rel="stylesheet" href="static/css/style-update.css">
 </head>
 <body>
     <header>
@@ -58,7 +58,7 @@
         const navEl = document.querySelector('.navbar');
         console.log(navEl);
         window.addEventListener('scroll', () => {
-            if (window. scrollY >= 500) {
+            if (window.scrollY >= 500) {
                 navEl.classList.add("navbar-scrolled")
             } else if (window. scrollY < 500) {
                 navEl.classList.remove("navbar-scrolled")
