@@ -97,7 +97,7 @@ def read_categories(data_addr='data/updates.json'):
     return cats
 
 
-def build_cat_templ(category,target_dir='static/templates/',mother_templ_addr='static/templates/category_template.html'):
+def build_cat_templ(category,target_dir='static/templates/',mother_templ_addr='static/templates/Category_template.html'):
     with open(mother_templ_addr) as mother_templ:
         mt_str = mother_templ.read()
     title = category
