@@ -58,7 +58,8 @@ class Page(object):
                 rem_str = sublst[1]
                 with open(brics_dir+target_title+'.html') as target:
                     add_lst = target.readlines()
-                dup_str += add_lst[0]
+                if len(add_lst) > 0:
+                    dup_str += add_lst[0]
                 for ind in range(1,len(add_lst)):
                     dup_str += ' '*indent
                     dup_str += add_lst[ind]
@@ -68,67 +69,3 @@ class Page(object):
 
     def bric_construct(self,dict):
         pass
-
-class Update(object):
-
-    def __init__(self,cat,title,desc):
-        self.cat = cat
-        self.title = title
-        self.desc = desc
-
-    def render(self,addr='static/brics/update.html'):
-        with open(addr) as ud_templ:
-            ud_txt = ud_templ.read()
-        repl_dict = {
-            '{%category%}':self.cat,
-            '{%title%}':self.title,
-            '{%description%}':self.desc
-        }
-        for repl in repl_dict:
-            ud_lst = ud_txt.split(repl)
-            ud_txt = ud_lst[0]+repl_dict[repl]+ud_lst[1]
-        return ud_txt+'\n' # there's a new line here!!!
-
-
-def render_updates(addr='data/updates.json',cal_day_addr='static/brics/cal_day.html',target_dir='static/brics/'):
-    with open(addr, 'r') as file:
-        data = json.load(file)
-    ud_html = ''
-    with open(cal_day_addr) as file:
-        cal_day_str = file.read()
-        cal_day_lst = cal_day_str.split('{%updates%}')
-    # finding the proper indent in cal_day.html
-    indent = 0
-    i = -1
-    while cal_day_lst[0][i] == ' ':
-        indent += 1
-        i -= 1
-    # insert lines for days irritatively
-    for cal_date in data:
-        cal_day_str_dup = cal_day_str
-        month,date = cal_date.split(' ')[0],cal_date.split(' ')[1]
-        # print(date,month)
-        date_split = cal_day_str_dup.split('{%date%}')
-        # print(cal_day_str_dup)
-        cal_day_str_dup = date_split[0]+date+date_split[1]
-        month_split = cal_day_str_dup.split('{%month%}')
-        cal_day_str_dup = month_split[0]+month+month_split[1]
-        updates_split = cal_day_str_dup.split('{%updates%}')
-        # assemble the first piece of the cal_day.html
-        day_html = updates_split[0]
-        # for every entry in that day
-        entry_html = ''
-        for rec in data[cal_date]:
-            # print(rec)
-            cat,title,desc = rec['cat'],rec['title'],rec['desc']
-            ud = Update(cat,title,desc)
-            entry_html += ud.render()
-        lines = entry_html.split('\n')
-        for line in lines:
-            day_html += ((' '*indent)+line+'\n')
-        # adding the last piece of cal_day.html
-        day_html += updates_split[1]
-        ud_html += day_html+'\n'
-    with open(target_dir+'all_updates.html','w') as target:
-        target.write(ud_html)
-    return ud_html
