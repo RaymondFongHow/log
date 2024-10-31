@@ -75,8 +75,12 @@ def render_updates(category='Dashboard',data_addr='data/updates.json',cal_day_ad
             day_html += updates_split[1]
             if entry > 0:
                 ud_html += day_html+'\n'
-        with open(target_dir+'updates_'+category+'.html','w') as target:
-            target.write(ud_html)
+
+    target_title = 'updates_'+category+'.html'
+    target_addr = target_dir+target_title
+    with open(target_addr,'w') as target:
+        target.write(ud_html)
+        print(f'Rendered {target_title} at log/{target_dir}')
     return ud_html
 
 
@@ -93,16 +97,34 @@ def read_categories(data_addr='data/updates.json'):
     return cats
 
 
-def build_cat_templ(cat,mot_templ_addr):
-    pass
+def build_cat_templ(category,target_dir='static/templates/',mother_templ_addr='static/templates/category_template.html'):
+    with open(mother_templ_addr) as mother_templ:
+        mt_str = mother_templ.read()
+    title = category
+    title_split = mt_str.split('{%title%}')
+    mt_str = title_split[0]+title+title_split[1]
+    category_split = mt_str.split('{%category%}')
+    mt_str = category_split[0]+category+category_split[1]
+    target_title = category+'_template.html'
+    target_addr = target_dir+target_title
+    with open(target_addr,'w') as target:
+        target.write(mt_str)
+        print(f'Built {target_title} at log/{target_dir}')
+    return mt_str
 
 
-# print(read_categories())
+
 
 render_updates() # category='Dashboard'
-render_updates(category='Physics')
-render_updates(category='Mathematics')
-render_updates(category='Computer Science')
+print('\n')
+
+cats = read_categories()
+# print("Categories:")
+for cat in read_categories():
+    print(cat)
+    build_cat_templ(category=cat)
+    render_updates(category=cat)
+    print('\n')
 
 page_mode_dict = {
     'Index'             :'publish',
@@ -119,4 +141,4 @@ for title in page_mode_dict:
     
 # sess.close()
 
-print(f'Process completed at {datetime.now()}')
+print(f'\n\n\nProcess completed at {datetime.now()}')
