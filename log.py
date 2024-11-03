@@ -140,8 +140,9 @@ page_mode_dict = {
     'Index'             :   'publish',
     'Dashboard'         :   'publish',
     'Fields'            :   'publish',
+    'About Me'          :   'publish',
     'Physics'           :   'publish',
-    'Mathematics'       :   'preview',
+    'Mathematics'       :   'publish',
     'Computer Science'  :   'publish'
     # 'New Field'         :   'publish'
 }

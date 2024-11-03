@@ -1,6 +1,18 @@
 {
     "2024":
         {
+        "Nov 02": [
+            {
+            "cat": "Mathematics",
+            "title": "MATH 2551 - Preparation",
+            "desc": "A overview of the course content.<br><br>#multi #multivariable_integration"
+            },
+            {
+            "cat": "Mathematics",
+            "title": "MATH 2552 - Preparation",
+            "desc": "A overview of the course content.<br>MIT OCW 18.03 Lecture 1: First-order ODE's, its geometric view (direction field, line elements; isocline; & integral curve, non-crossing & non-tangent by existence & uniqueness theorem, & their relevance to the solutions)<br><br>#multi #multivariable_integration"
+            }
+        ],
         "Oct 31": [
             {
             "cat": "Physics",
