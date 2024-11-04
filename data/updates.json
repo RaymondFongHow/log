@@ -1,6 +1,14 @@
 {
     "2024":
+        
         {
+        "Nov 03": [
+            {
+            "cat": "Mathematics",
+            "title": "Math 2552",
+            "desc": "18.03SC: Lec 2 & 3; Unit I, Conventions & Basic DE's (Todo: Problem Set Part I, Problem Set Part II)<br><br>#diffeq #differential_equations"
+            }
+        ],
         "Nov 02": [
             {
             "cat": "Mathematics",
@@ -10,7 +18,7 @@
             {
             "cat": "Mathematics",
             "title": "MATH 2552 - Preparation",
-            "desc": "A overview of the course content.<br>MIT OCW 18.03 Lecture 1: First-order ODE's, its geometric view (direction field, line elements; isocline; & integral curve, non-crossing & non-tangent by existence & uniqueness theorem, & their relevance to the solutions)<br><br>#multi #multivariable_integration"
+            "desc": "A overview of the course content.<br>MIT OCW 18.03 Lecture 1: First-order ODE's, its geometric view (direction field, line elements; isocline; & integral curve, non-crossing & non-tangent by existence & uniqueness theorem, & their relevance to the solutions)<br><br>#diffeq #differential_equations"
             }
         ],
         "Oct 31": [
