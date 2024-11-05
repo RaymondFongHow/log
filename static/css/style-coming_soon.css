@@ -4,3 +4,7 @@
     text-align: center;
     padding: 20% 15% 20% 15%;
 }
+
+.coming_soon a {
+    font-size: 2vw;
+}
