@@ -2,11 +2,18 @@
     "2024":
         
         {
+        "Nov 04": [
+            {
+            "cat": "Mathematics",
+            "title": "Math 2552",
+            "desc": "18.03SC: Lec 4 Direct/inverse substitutions & app. in solving Bernoulli Equations, & Lec 5 Autonomous equations, leading to a discussion on critical points of a linear DE.<br><br>#diffeq #differential_equations"
+            }
+        ],
         "Nov 03": [
             {
             "cat": "Mathematics",
             "title": "Math 2552",
-            "desc": "18.03SC: Lec 2 & 3; Unit I, Conventions & Basic DE's (Todo: Problem Set Part I, Problem Set Part II)<br><br>#diffeq #differential_equations"
+            "desc": "18.03SC: Lec 2 Numerical Methods (Euler's, RK2, RK4, etc.) & errors, & Lec 3 Solving eqn. in Standard Linear Form using integrating factors; Unit I, Conventions & Basic DE's (to do: Problem Set Part I, Problem Set Part II)<br><br>#diffeq #differential_equations"
             }
         ],
         "Nov 02": [
