@@ -5,8 +5,8 @@
         "Feb 01": [
             {
             "cat": "Mathematics",
-            "title": "Math 2551",
-            "desc": "18.02: Lec 20-25, wrapping up double integral; kick starting triple integral and 3D coordinate systems<br><br>#multi #multivariable_calculus"
+            "title": "MATH 2551",
+            "desc": "18.02: Lec 20-25, wrapping up double integral; kick starting triple integral and 3D coordinate systems.<br><br>#multi #multivariable_calculus"
             }
         ]
     },
@@ -14,11 +14,11 @@
     "End of Semester":
 
     {
-        "XXX 00": [
+        " 00": [
             {
-            "cat": "Update",
-            "title": "Update Paused",
-            "desc": "Due to high workload at the end of Fall 25 and a schedule for rest during the winter break, updates for Log were paused."
+            "cat": "Announcement",
+            "title": "Updates Paused",
+            "desc": "Due to high workload at the end of Fall 24 and a schedule prioritizing a good rest during the winter break, updates for Log were paused."
             }
         ]
     },
@@ -26,17 +26,31 @@
 
     "2024":
         {
+        "Dec 17": [
+            {
+            "cat": "Announcement",
+            "title": "Aced Fall 24",
+            "desc": "Congradulate me on achieving a 4.0 GPA for Fall 2024!<br><br>#diffeq #differential_equations"
+            }
+        ],
+        "Dec 16": [
+            {
+            "cat": "Announcement",
+            "title": "MATH 2552 ASE",
+            "desc": "Congradulate me on passing the MATH 2552 Differential Equations Advance Standing Examination! This means that I have received a full 4 credits associated with this course and have cleared it as prerequisits to other relevant courses.<br><br>#diffeq #differential_equations"
+            }
+        ],
         "Nov 04": [
             {
             "cat": "Mathematics",
-            "title": "Math 2552",
+            "title": "MATH 2552",
             "desc": "18.03SC: Lec 4 Direct/inverse substitutions & app. in solving Bernoulli Equations, & Lec 5 Autonomous equations, leading to a discussion on critical points of a linear DE.<br><br>#diffeq #differential_equations"
             }
         ],
         "Nov 03": [
             {
             "cat": "Mathematics",
-            "title": "Math 2552",
+            "title": "MATH 2552",
             "desc": "18.03SC: Lec 2 Numerical Methods (Euler's, RK2, RK4, etc.) & errors, & Lec 3 Solving eqn. in Standard Linear Form using integrating factors; Unit I, Conventions & Basic DE's (to do: Problem Set Part I, Problem Set Part II)<br><br>#diffeq #differential_equations"
             }
         ],
