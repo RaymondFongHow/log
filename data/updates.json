@@ -1,6 +1,30 @@
 {
-    "2024":
+    "2025":
         
+    {
+        "Feb 01": [
+            {
+            "cat": "Mathematics",
+            "title": "Math 2551",
+            "desc": "18.02: Lec 20-25, wrapping up double integral; kick starting triple integral and 3D coordinate systems<br><br>#multi #multivariable_calculus"
+            }
+        ]
+    },
+
+    "End of Semester":
+
+    {
+        "XXX 00": [
+            {
+            "cat": "Update",
+            "title": "Update Paused",
+            "desc": "Due to high workload at the end of Fall 25 and a schedule for rest during the winter break, updates for Log were paused."
+            }
+        ]
+    },
+
+
+    "2024":
         {
         "Nov 04": [
             {
