@@ -2,11 +2,25 @@
     "2025":
         
     {
+        "Feb 02": [
+            {
+            "cat": "Mathematics",
+            "title": "MATH 2551",
+            "desc": "18.02: Lec 26-32, vector fields, line and surface integrals, and divergence and curl in 3D. Stocks' Theorem as the generalized Green's Theorem in 3D.<br><br>#multi #multivariable_calculus"
+            }
+        ],
         "Feb 01": [
             {
             "cat": "Mathematics",
             "title": "MATH 2551",
             "desc": "18.02: Lec 20-25, wrapping up double integral; kick starting triple integral and 3D coordinate systems.<br><br>#multi #multivariable_calculus"
+            }
+        ],
+        "Jan 10": [
+            {
+            "cat": "Announcement",
+            "title": "Registration Spring 2025",
+            "desc": "I'm happy to share the list of courses that I registered for Spring 2025. In the field of physics, I'm registered for PHYS 2212 Principles of Physics II and PHYS 2213 Introduction to Modern Physics. I'm also unofficially sitting in PHYS 4262 Solid State Physics and PHYS 4143 Quantum Mechanics II for enrichment. For other sciences and engineering courses, I'm in CHEM 1310 Principle of General Chemistry for Engineers, COE 2001 Statics, ME 2016 Computing Techniques, and ECE 3710 Circuits and Electronics. In the field of music, I'm enrolled in MUSI 2011 Fundamentals of Musicianship. I'm also in APPH 1040 to complete the institution health requirement.<br><br>#registration #courses"
             }
         ]
     },
@@ -30,7 +44,7 @@
             {
             "cat": "Announcement",
             "title": "Aced Fall 24",
-            "desc": "Congradulate me on achieving a 4.0 GPA for Fall 2024!<br><br>#diffeq #differential_equations"
+            "desc": "Congradulate me on achieving a 4.0 GPA for Fall 2024!<br><br>#GPA"
             }
         ],
         "Dec 16": [
