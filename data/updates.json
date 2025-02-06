@@ -2,6 +2,13 @@
     "2025":
         
     {
+        "Feb 04": [
+            {
+            "cat": "Mathematics",
+            "title": "MATH 2551",
+            "desc": "18.02: Lec 33-34, revision.<br><br>#multi #multivariable_calculus"
+            }
+        ],
         "Feb 02": [
             {
             "cat": "Mathematics",
@@ -22,10 +29,17 @@
             "title": "Registration Spring 2025",
             "desc": "I'm happy to share the list of courses that I registered for Spring 2025. In the field of physics, I'm registered for PHYS 2212 Principles of Physics II and PHYS 2213 Introduction to Modern Physics. I'm also unofficially sitting in PHYS 4262 Solid State Physics and PHYS 4143 Quantum Mechanics II for enrichment. For other sciences and engineering courses, I'm in CHEM 1310 Principle of General Chemistry for Engineers, COE 2001 Statics, ME 2016 Computing Techniques, and ECE 3710 Circuits and Electronics. In the field of music, I'm enrolled in MUSI 2011 Fundamentals of Musicianship. I'm also in APPH 1040 to complete the institution health requirement.<br><br>#registration #courses"
             }
+        ],
+        " 00": [
+            {
+            "cat": "Announcement",
+            "title": "Beyond Registered Courses",
+            "desc": "In Spring 25, besides regular courses that I officially registered for, I am unofficially sitting in PHYS 4143 Quantum Mechanics II and PHYS 4262 Solid State Physics, achieving a moderate conceptual understanding in both. #courses"
+            }
         ]
     },
 
-    "End of Semester":
+    "End of Fall 24":
 
     {
         " 00": [
@@ -33,6 +47,11 @@
             "cat": "Announcement",
             "title": "Updates Paused",
             "desc": "Due to high workload at the end of Fall 24 and a schedule prioritizing a good rest during the winter break, updates for Log were paused."
+            },
+            {
+            "cat": "Announcement",
+            "title": "Beyond Registered Courses",
+            "desc": "In Fall 24, besides regular courses that I officially registered for, I unofficially sat in courses across a wide range of disciplines for intellectual exploration. Among those courses, I sat in PHYS 2213 A Introduction to Modern Physics and PHYS 3143 Quantum Mechanics I at almost full attendance and achieved a very high level of conceptual understanding of all of the course content.  I also sat in include PHYS 3122 Electro- and Magnetostatics, then PHYS 3123 Electrodynamics, in which I achieved good understanding of the content and could follow along relevant calculations. Other courses that I sat in occasionally include POL 1101 Government of the United States, MATH 1554 Linear Algebra, MATH 2551 Multivariable Calculus, and MATH 2552 Differential Equations. #courses"
             }
         ]
     },
