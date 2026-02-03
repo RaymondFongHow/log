@@ -63,7 +63,7 @@
         <main class="dashboard_main">
             <section class="page_blank"></section>
             <section class="page_title">
-                <p>Dashboard</p>
+                <p id="category-title">Loading...</p>
             </section>
             <section class="ud_list" id="updates-container">
                 <!-- Updates will be loaded here by JavaScript -->
@@ -71,18 +71,39 @@
         </main>
 
         <script>
-            // Fetch and render updates from JSON
-            async function loadUpdates() {
+            // Get category from URL parameter (?cat=Mathematics)
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('cat');
+            
+            if (!category) {
+                // No category specified, redirect to Fields
+                window.location.href = 'Fields.html';
+            }
+            
+            // Update page title
+            document.getElementById('category-title').textContent = category;
+            document.title = `${category} - Log - Raymond Fong How`;
+            
+            // Fetch and render updates filtered by category
+            async function loadCategoryUpdates() {
                 try {
                     const response = await fetch('data/updates.json');
                     const entries = await response.json();
                     
+                    // Filter entries for this category
+                    const categoryEntries = entries.filter(entry => entry.cat === category);
+                    
                     const container = document.getElementById('updates-container');
                     let html = '';
                     
+                    if (categoryEntries.length === 0) {
+                        container.innerHTML = '<p>No updates found for this category.</p>';
+                        return;
+                    }
+                    
                     // Group entries by date
                     const byDate = {};
-                    entries.forEach(entry => {
+                    categoryEntries.forEach(entry => {
                         if (!byDate[entry.date]) {
                             byDate[entry.date] = [];
                         }
@@ -123,13 +144,13 @@
                     </div>
                     <div class="ud_right">`;
                         
-                        // Add all updates for this date
+                        // Add all updates for this date (category label hidden since redundant)
                         updates.forEach(update => {
                             html += `
                         <div class="ud_text">
                             <div class="ud_header">
                                 <p class="ud_cat">
-                                    ${update.cat}
+                                    
                                 </p>
                                 <p class="ud_title">
                                     ${update.title}
@@ -157,7 +178,7 @@
             }
             
             // Load updates when page loads
-            window.addEventListener('DOMContentLoaded', loadUpdates);
+            window.addEventListener('DOMContentLoaded', loadCategoryUpdates);
         </script>
     </body>
 </html>

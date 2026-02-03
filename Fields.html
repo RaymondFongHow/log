@@ -3,10 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Log - Fields of Study</title>
-        <!-- <script type="text/javascript" src="static/js/fading_nav_bar.js"></script> -->
-        <!-- use: <link rel="stylesheet" href="static/css"> -->
-         
+        <title>Fields - Log - Raymond Fong How</title>
+        
         <link rel="stylesheet" href="static/css/style-general.css">
         <link rel="stylesheet" href="static/css/style-fonts.css">
         <link rel="stylesheet" href="static/css/style-nav.css">
@@ -53,13 +51,11 @@
             </nav>
         </header>
         <script>
-            console.log("hi");
             const navEl = document.querySelector('.navbar');
-            console.log(navEl);
             window.addEventListener('scroll', () => {
                 if (window.scrollY >= 200) {
                     navEl.classList.add("navbar-scrolled")
-                } else if (window. scrollY < 200) {
+                } else if (window.scrollY < 200) {
                     navEl.classList.remove("navbar-scrolled")
                 }
             })
@@ -67,15 +63,54 @@
         <main class="dashboard_main">
             <section class="page_blank"></section>
             <section class="page_title">
-                <p>Fields of Study</p>
+                <p>Fields</p>
             </section>
-            <section class="cat_list">
-                <div class='cat_link'><a href='Mathematics.html'>Mathematics</a></div>
-                <div class='cat_link'><a href='Announcement.html'>Announcement</a></div>
-                <div class='cat_link'><a href='Physics.html'>Physics</a></div>
-                <div class='cat_link'><a href='Computer Science.html'>Computer Science</a></div>
-
+            <section class="cat_list" id="categories-container">
+                <!-- Categories will be loaded here by JavaScript -->
             </section>
         </main>
+
+        <script>
+            // Fetch and display all unique categories
+            async function loadCategories() {
+                try {
+                    const response = await fetch('data/updates.json');
+                    const entries = await response.json();
+                    
+                    const categories = new Set();
+                    
+                    // Extract unique categories
+                    entries.forEach(entry => {
+                        if (entry.cat && entry.cat.trim() !== '') {
+                            categories.add(entry.cat);
+                        }
+                    });
+                    
+                    // Convert to array and sort alphabetically
+                    const sortedCategories = Array.from(categories).sort();
+                    
+                    // Generate HTML
+                    const container = document.getElementById('categories-container');
+                    let html = '';
+                    
+                    sortedCategories.forEach(category => {
+                        html += `<div class='cat_link'><a href='Category.html?cat=${encodeURIComponent(category)}'>${category}</a></div>\n`;
+                    });
+                    
+                    if (html === '') {
+                        html = '<p>No categories found.</p>';
+                    }
+                    
+                    container.innerHTML = html;
+                } catch (error) {
+                    console.error('Error loading categories:', error);
+                    document.getElementById('categories-container').innerHTML = 
+                        '<p>Error loading categories. Please try again later.</p>';
+                }
+            }
+            
+            // Load categories when page loads
+            window.addEventListener('DOMContentLoaded', loadCategories);
+        </script>
     </body>
 </html>
