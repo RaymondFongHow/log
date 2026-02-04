@@ -1,142 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" style="background:#000">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Category - Log - Raymond Fong How</title>
-        <style>body{background:#000;color:#fff;margin:0}</style>
-        <script src="styles.js"></script>
-    </head>
-    <body>
-        <header></header>
-        
-        <main class="dashboard_main">
-            <section class="page_blank"></section>
-            <section class="page_title">
-                <p id="category-title">Loading...</p>
-            </section>
-            <section class="ud_list" id="updates-container"></section>
-            <div class="load-more-container" id="load-more-container" style="display: none;">
-                <button class="load-more-btn" id="load-more-btn">Load More</button>
-            </div>
-        </main>
-
-        <script src="navbar.js"></script>
-        <script src="footer.js"></script>
-        <script src="loading.js"></script>
-        <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('cat');
-            
-            if (!category) {
-                window.location.href = 'Fields.html';
-            }
-            
-            document.getElementById('category-title').textContent = category;
-            document.title = `${category} - Log - Raymond Fong How`;
-            
-            let allCategoryEntries = [];
-            let displayedCount = 0;
-            const ENTRIES_PER_PAGE = 10;
-            
-            async function loadCategoryUpdates() {
-                const loader = new LoadingManager('updates-container');
-                loader.show();
-                
-                try {
-                    const response = await fetch('data/updates.json');
-                    const entries = await response.json();
-                    
-                    allCategoryEntries = entries.filter(entry => entry.cat === category);
-                    
-                    if (allCategoryEntries.length === 0) {
-                        loader.error('No updates found for this category.');
-                        return;
-                    }
-                    
-                    loader.hide();
-                    displayNextBatch();
-                } catch (error) {
-                    console.error('Error loading updates:', error);
-                    loader.error('Error loading updates. Please try again later.');
-                }
-            }
-            
-            function displayNextBatch() {
-                const container = document.getElementById('updates-container');
-                const loadMoreContainer = document.getElementById('load-more-container');
-                
-                const endIndex = Math.min(displayedCount + ENTRIES_PER_PAGE, allCategoryEntries.length);
-                const batchEntries = allCategoryEntries.slice(displayedCount, endIndex);
-                
-                const byDate = {};
-                batchEntries.forEach(entry => {
-                    if (!byDate[entry.date]) {
-                        byDate[entry.date] = [];
-                    }
-                    byDate[entry.date].push(entry);
-                });
-                
-                const sortedDates = Object.keys(byDate).sort().reverse();
-                
-                let html = '';
-                sortedDates.forEach(date => {
-                    const updates = byDate[date];
-                    
-                    const [year, month, day] = date.split('-');
-                    const monthNames = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    const displayDate = day;
-                    const displayMonthYear = monthNames[parseInt(month)] + ' ' + year;
-                    
-                    html += `
-            <div class="ud_info">
-                <div class="ud_left">
-                    <div class="ud_date">${displayDate}</div>
-                    <div class="ud_monthyear">${displayMonthYear}</div>
-                </div>
-                <div class="ud_right">`;
-                    
-                    updates.forEach(update => {
-                        html += `
-                    <div class="ud_text">
-                        <div class="ud_header">
-                            <p class="ud_cat"></p>
-                            <p class="ud_title">${update.title}</p>
-                        </div>
-                        <div class="ud_description">
-                            <p>${update.desc}</p>
-                        </div>
-                    </div>`;
-                    });
-                    
-                    html += `
-                </div>
-            </div>`;
-                });
-                
-                if (displayedCount === 0) {
-                    container.innerHTML = html;
-                } else {
-                    container.insertAdjacentHTML('beforeend', html);
-                }
-                
-                displayedCount = endIndex;
-                
-                if (displayedCount < allCategoryEntries.length) {
-                    loadMoreContainer.style.display = 'block';
-                } else {
-                    loadMoreContainer.style.display = 'none';
-                }
-            }
-            
-            document.addEventListener('DOMContentLoaded', () => {
-                const loadMoreBtn = document.getElementById('load-more-btn');
-                if (loadMoreBtn) {
-                    loadMoreBtn.addEventListener('click', displayNextBatch);
-                }
-                loadCategoryUpdates();
-            });
-        </script>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Category - Log</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body data-page="category">
+    <header></header>
+    <main>
+        <h1 class="page_title" id="page-title-text">Category</h1>
+        <div id="content-wrap" class="ud_list"></div>
+        <div style="text-align: center; padding-bottom: 80px;">
+            <button id="load-more-btn" style="display:none;">Load More</button>
+        </div>
+    </main>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="main.js"></script>
+</body>
 </html>

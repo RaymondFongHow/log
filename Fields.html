@@ -1,64 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" style="background:#000">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Fields - Log - Raymond Fong How</title>
-        <style>body{background:#000;color:#fff;margin:0}</style>
-        <script src="styles.js"></script>
-    </head>
-    <body>
-        <header></header>
-        
-        <main class="dashboard_main">
-            <section class="page_blank"></section>
-            <section class="page_title">
-                <p>Fields</p>
-            </section>
-            <section class="cat_list" id="categories-container"></section>
-        </main>
-
-        <script src="navbar.js"></script>
-        <script src="footer.js"></script>
-        <script src="loading.js"></script>
-        <script>
-            async function loadCategories() {
-                const loader = new LoadingManager('categories-container');
-                loader.show();
-                
-                try {
-                    const response = await fetch('data/updates.json');
-                    const entries = await response.json();
-                    
-                    const categories = new Set();
-                    entries.forEach(entry => {
-                        if (entry.cat && entry.cat.trim() !== '') {
-                            categories.add(entry.cat);
-                        }
-                    });
-                    
-                    const sortedCategories = Array.from(categories).sort();
-                    
-                    const container = document.getElementById('categories-container');
-                    let html = '';
-                    
-                    sortedCategories.forEach(category => {
-                        html += `<div class='cat_link'><a href='Category.html?cat=${encodeURIComponent(category)}'>${category}</a></div>\n`;
-                    });
-                    
-                    if (html === '') {
-                        html = '<p>No categories found.</p>';
-                    }
-                    
-                    loader.hide();
-                    container.innerHTML = html;
-                } catch (error) {
-                    console.error('Error loading categories:', error);
-                    loader.error('Error loading categories. Please try again later.');
-                }
-            }
-            
-            document.addEventListener('DOMContentLoaded', loadCategories);
-        </script>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Log</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700&display=swap" rel="stylesheet">
+</head>
+<body data-page="fields">
+    <header></header>
+    <main>
+        <h1 class="page_title" id="page-title-text">Fields</h1>
+        <div id="content-wrap" class="ud_list"></div>
+        <div style="text-align: center; padding-bottom: 50px;">
+            <button id="load-more-btn" style="background:none; border:1px solid #fff; color:#fff; padding:10px 30px; cursor:pointer; display:none;">Load More</button>
+        </div>
+    </main>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="main.js"></script>
+</body>
 </html>

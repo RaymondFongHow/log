@@ -7,7 +7,7 @@ function createNavbar(activePage) {
                     <img src="assets/images/common/logo-white.png" alt="LOGO">
                     <div class="brand_text">
                         <div>
-                            <p class="title">Log 🪵</p>
+                            <p class="title">Log</p>
                         </div>
                         <div>
                             <p class="tagline">Raymond Fong How</p>
@@ -53,11 +53,14 @@ function createNavbar(activePage) {
             </div>
         </div>
     `;
-    
-    const header = document.querySelector('header');
-    if (header) {
-        header.insertAdjacentHTML('beforeend', navHTML);
+
+    let header = document.querySelector('header');
+    if (!header) {
+        header = document.createElement('header');
+        document.body.prepend(header);
     }
+
+    header.insertAdjacentHTML('beforeend', navHTML);
     
     // Hamburger menu toggle
     const hamburger = document.querySelector('.hamburger-btn');

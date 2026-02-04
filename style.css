@@ -1,0 +1,478 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
+
+:root {
+    --bg: #000;
+    --text: #fff;
+    --muted: rgba(255, 255, 255, 0.6);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --max-width: 980px;
+    --page-padding: 0 20px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+    min-height: 100vh;
+}
+
+main {
+    min-height: 100vh;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 2px;
+}
+
+a:hover {
+    border-color: #fff;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* Navbar (if/when injected by JS) */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 20;
+}
+
+.navbar a {
+    border-bottom: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 18px;
+}
+
+/* ========================================
+   PAGE TITLES & CONTAINERS
+   ======================================== */
+.page_title { 
+    text-align: center; 
+    padding: 120px 20px 40px; 
+    font-size: clamp(2rem, 8vw, 4rem); /* Responsive font size */
+    font-weight: 100; 
+    text-transform: capitalize;
+}
+
+.ud_list { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* ========================================
+   DAILY PAGE STYLING (The Screenshot Area)
+   ======================================== */
+.daily-screenshot-area {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    background: #000;
+}
+
+.daily-card {
+    border: 1px solid var(--border-color);
+    padding: 60px 40px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    background: #000;
+}
+
+.daily-streak { font-size: 0.8rem; letter-spacing: 4px; opacity: 0.5; margin-bottom: 10px; }
+.daily-date { font-size: 1.5rem; font-weight: 700; margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+
+.daily-label { font-size: 0.7rem; letter-spacing: 2px; opacity: 0.4; margin-bottom: 15px; text-transform: uppercase; }
+#today-work { font-size: 1.1rem; line-height: 1.8; font-weight: 300; text-align: left; }
+
+/* ========================================
+   ABOUT ME STYLING
+   ======================================== */
+.about-hero {
+    height: 60vh;
+    position: relative;
+    overflow: hidden;
+}
+.about-hero img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+.about-content { max-width: 700px; margin: -50px auto 100px; position: relative; z-index: 2; background: #000; padding: 50px; border: 1px solid var(--border-color); }
+.about-content p { margin-bottom: 20px; font-size: 1.1rem; opacity: 0.8; }
+
+/* Load More Button */
+#load-more-btn {
+    background: none; border: 1px solid var(--border-color); color: #fff;
+    padding: 12px 40px; cursor: pointer; transition: 0.3s; margin-top: 20px;
+}
+#load-more-btn:hover { background: #fff; color: #000; }
+
+/* ========================================
+   NAVBAR DETAILS + HAMBURGER
+   ======================================== */
+.navbar {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+    border-bottom: none;
+}
+
+.navbar-scrolled {
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    border-bottom: none;
+    color: inherit;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: inherit;
+}
+
+.brand_box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand_box img {
+    height: 42px;
+    width: auto;
+    filter: drop-shadow(1px 1px 2px #000);
+}
+
+.brand_text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.brand_text .title {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+.brand_text .tagline {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.nav_blank {
+    flex: 1;
+}
+
+.nav_desktop {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav_opt a {
+    border-bottom: none;
+    color: inherit;
+}
+
+.nav_opt p {
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+
+.nav_opt p:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-active p {
+    border-bottom: 1px solid #fff;
+}
+
+.nav_hamburger {
+    display: none;
+}
+
+.hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 28px;
+}
+
+.mobile-menu-content a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 300;
+    padding: 12px 24px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.mobile-menu-content a.active,
+.mobile-menu-content a:hover {
+    border-bottom-color: #fff;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* ========================================
+   UPDATE LISTS (Dashboard + Category)
+   ======================================== */
+.ud_list,
+.cat_ud_list {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.ud_info {
+    display: flex;
+    gap: 32px;
+    margin: 40px 0;
+}
+
+.ud_left {
+    min-width: 90px;
+    text-align: center;
+}
+
+.ud_date {
+    font-weight: 700;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+}
+
+.ud_monthyear {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    opacity: 0.7;
+}
+
+.ud_right {
+    flex: 1;
+}
+
+.ud_text {
+    padding-top: 6px;
+    padding-bottom: 26px;
+}
+
+.ud_cat {
+    font-weight: 700;
+    font-size: clamp(0.85rem, 2.4vw, 1rem);
+    font-style: italic;
+    margin: 0 0 6px 0;
+}
+
+.ud_title {
+    font-weight: 300;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    margin: 0 0 10px 0;
+}
+
+.ud_description {
+    font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+    opacity: 0.85;
+}
+
+.ud_description p {
+    margin: 0;
+}
+
+/* ========================================
+   CATEGORY LIST
+   ======================================== */
+.cat_list {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.cat_link {
+    font-weight: 300;
+    font-size: clamp(1.2rem, 4vw, 2.2rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.site-footer {
+    margin-top: 80px;
+    padding: 30px 20px 20px;
+    background: #000;
+}
+
+.footer-line {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    margin-bottom: 20px;
+}
+
+.footer-content {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.8;
+}
+
+.footer-version {
+    font-size: 0.7rem;
+    margin-top: 5px;
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 300px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--border-color);
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .nav_desktop {
+        display: none;
+    }
+
+    .nav_hamburger {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar {
+        height: 58px;
+        padding: 0 18px;
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .page_title {
+        padding-top: 100px;
+    }
+
+    .ud_info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ud_left {
+        text-align: left;
+    }
+}
