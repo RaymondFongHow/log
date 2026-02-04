@@ -1,4 +1,33 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
+@font-face {
+    font-family: Lato;
+    src: url("assets/fonts/Lato/Lato-Black.ttf");
+    font-weight: 800 900 1000;
+    font-style: normal;
+}
+@font-face {
+    font-family: Lato;
+    src: url("assets/fonts/Lato/Lato-Bold.ttf");
+    font-weight: 600 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: Lato;
+    src: url("assets/fonts/Lato/Lato-Regular.ttf");
+    font-weight: 400 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: Lato;
+    src: url("assets/fonts/Lato/Lato-Light.ttf");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: Lato;
+    src: url("assets/fonts/Lato/Lato-Thin.ttf");
+    font-weight: 100 200;
+    font-style: normal;
+}
 
 :root {
     --bg: #000;
@@ -19,7 +48,7 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
+    font-family: Lato, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     letter-spacing: 0.2px;
     min-height: 100vh;
@@ -333,6 +362,7 @@ body.menu-open {
 .ud_monthyear {
     font-size: clamp(0.8rem, 2vw, 1rem);
     opacity: 0.7;
+    font-weight: 300;
 }
 
 .ud_right {
@@ -360,6 +390,7 @@ body.menu-open {
 .ud_description {
     font-size: clamp(0.95rem, 2.2vw, 1.05rem);
     opacity: 0.85;
+    font-weight: 300;
 }
 
 .ud_description p {
