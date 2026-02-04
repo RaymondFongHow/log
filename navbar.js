@@ -16,25 +16,33 @@ function createNavbar(activePage) {
                 </div>
             </a>
             <div class="nav_blank"></div>
-            <div class="nav_opt ${activePage === 'dashboard' ? 'nav-active' : ''}">
-                <a href="Dashboard.html">
-                    <p>Dashboard</p>
-                </a>
+            <div class="nav_opt">
+                <div class="${activePage === 'dashboard' ? 'nav-active' : ''}">
+                    <a href="Dashboard.html">
+                        <p>Dashboard</p>
+                    </a>
+                </div>
             </div>
-            <div class="nav_opt ${activePage === 'fields' ? 'nav-active' : ''}">
-                <a href="Fields.html">
-                    <p>Fields</p>
-                </a>
+            <div class="nav_opt">
+                <div class="${activePage === 'fields' ? 'nav-active' : ''}">
+                    <a href="Fields.html">
+                        <p>Fields</p>
+                    </a>
+                </div>
             </div>
-            <div class="nav_opt ${activePage === 'daily' ? 'nav-active' : ''}">
-                <a href="Daily.html">
-                    <p>Daily</p>
-                </a>
+            <div class="nav_opt">
+                <div class="${activePage === 'daily' ? 'nav-active' : ''}">
+                    <a href="Daily.html">
+                        <p>Daily</p>
+                    </a>
+                </div>
             </div>
-            <div class="nav_opt ${activePage === 'about' ? 'nav-active' : ''}">
-                <a href="About Me.html">
-                    <p>About Me</p>
-                </a>
+            <div class="nav_opt">
+                <div class="${activePage === 'about' ? 'nav-active' : ''}">
+                    <a href="About Me.html">
+                        <p>About Me</p>
+                    </a>
+                </div>
             </div>
         </nav>
     `;
