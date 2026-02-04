@@ -1,0 +1,99 @@
+/* Mobile-friendly enhancements */
+
+/* Better navbar on mobile */
+@media (max-width: 768px) {
+    .navbar {
+        position: sticky !important;
+        top: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.95) !important;
+        backdrop-filter: blur(10px);
+        padding: 10px 15px;
+    }
+    
+    .navbar-scrolled {
+        background: rgba(0, 0, 0, 0.98) !important;
+    }
+    
+    .brand_box {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .brand_box img {
+        max-width: 30px;
+        margin-right: 10px;
+    }
+    
+    .brand_text .title {
+        font-size: 16px;
+    }
+    
+    .brand_text .tagline {
+        font-size: 11px;
+    }
+    
+    .nav_opt {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .nav_opt p {
+        margin: 0;
+    }
+}
+
+/* Responsive padding for main content */
+@media (max-width: 768px) {
+    .dashboard_main {
+        padding: 0 15px;
+    }
+    
+    .ud_list {
+        padding: 0;
+    }
+    
+    .page_title {
+        font-size: 28px;
+        padding: 20px 0;
+    }
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 768px) {
+    .load-more-btn,
+    .cat_link a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Active nav highlighting */
+.nav-active {
+    position: relative;
+}
+
+.nav-active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+/* Loading state improvements */
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+    }
+}

@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Log - About Me</title>
-        <!-- <script type="text/javascript" src="static/js/fading_nav_bar.js"></script> -->
-        <!-- use: <link rel="stylesheet" href="static/css"> -->
+        <title>About Me - Log - Raymond Fong How</title>
          
         <link rel="stylesheet" href="static/css/style-general.css">
         <link rel="stylesheet" href="static/css/style-fonts.css">
@@ -25,53 +23,14 @@
                 </div>
                 <img src="assets/images/about_me/about_me_cover.png" alt="studio-cover">
             </div>
-            <nav class="navbar">
-                <a class="brand" href="index.html">
-                    <div class="brand_box">
-                        <img src="assets/images/common/logo-white.png" alt="LOGO">
-                        <div class="brand_text">
-                            <div>
-                                <p class="title">Log 🪵</p>
-                            </div>
-                            <div>
-                                <p class="tagline">Raymond Fong How</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="nav_blank">
-                </div>
-                <div class="nav_opt">
-                    <a href="Dashboard.html">
-                        <p>Dashboard</p>
-                    </a>
-                </div>
-                <div class="nav_opt">
-                    <a href="Fields.html">
-                        <p>Fields</p>
-                    </a>
-                </div>
-                <div class="nav_opt">
-                    <a href="About Me.html">
-                        <p>About Me</p>
-                    </a>
-                </div>
-            </nav>
+            <!-- Navbar will be injected by navbar.js -->
         </header>
-        <script>
-            console.log("hi");
-            const navEl = document.querySelector('.navbar');
-            console.log(navEl);
-            window.addEventListener('scroll', () => {
-                if (window.scrollY >= 200) {
-                    navEl.classList.add("navbar-scrolled")
-                } else if (window. scrollY < 200) {
-                    navEl.classList.remove("navbar-scrolled")
-                }
-            })
-        </script>
+        
         <main>
             <section></section>
         </main>
+        
+        <script src="navbar.js"></script>
+        <script src="loading.js"></script>
     </body>
 </html>

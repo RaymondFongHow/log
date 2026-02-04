@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Log - Raymond Fong How</title>
+        <title>Dashboard - Log - Raymond Fong How</title>
         
         <link rel="stylesheet" href="static/css/style-general.css">
         <link rel="stylesheet" href="static/css/style-fonts.css">
@@ -14,142 +14,150 @@
         <link rel="stylesheet" href="static/css/style-update.css">
         <link rel="stylesheet" href="static/css/style-category_update.css">
         <link rel="stylesheet" href="static/css/style-cat_list.css">
+        
+        <style>
+            .load-more-container {
+                text-align: center;
+                padding: 40px 20px;
+            }
+            
+            .load-more-btn {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                color: #fff;
+                padding: 12px 30px;
+                font-size: 14px;
+                cursor: pointer;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+            
+            .load-more-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+            
+            .load-more-btn:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        </style>
     </head>
     <body>
         <header>
-            <nav class="navbar">
-                <a class="brand" href="index.html">
-                    <div class="brand_box">
-                        <img src="assets/images/common/logo-white.png" alt="LOGO">
-                        <div class="brand_text">
-                            <div>
-                                <p class="title">Log 🪵</p>
-                            </div>
-                            <div>
-                                <p class="tagline">Raymond Fong How</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="nav_blank">
-                </div>
-                <div class="nav_opt">
-                    <a href="Dashboard.html">
-                        <p>Dashboard</p>
-                    </a>
-                </div>
-                <div class="nav_opt">
-                    <a href="Fields.html">
-                        <p>Fields</p>
-                    </a>
-                </div>
-                <div class="nav_opt">
-                    <a href="About Me.html">
-                        <p>About Me</p>
-                    </a>
-                </div>
-            </nav>
+            <!-- Navbar will be injected by navbar.js -->
         </header>
-        <script>
-            const navEl = document.querySelector('.navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY >= 200) {
-                    navEl.classList.add("navbar-scrolled")
-                } else if (window.scrollY < 200) {
-                    navEl.classList.remove("navbar-scrolled")
-                }
-            })
-        </script>
+        
         <main class="dashboard_main">
             <section class="page_blank"></section>
             <section class="page_title">
                 <p>Dashboard</p>
             </section>
             <section class="ud_list" id="updates-container">
-                <!-- Updates will be loaded here by JavaScript -->
+                <!-- Updates will be loaded here -->
             </section>
+            <div class="load-more-container" id="load-more-container" style="display: none;">
+                <button class="load-more-btn" id="load-more-btn">Load More</button>
+            </div>
         </main>
 
+        <script src="navbar.js"></script>
+        <script src="loading.js"></script>
         <script>
-            // Fetch and render updates from JSON
+            let allEntries = [];
+            let displayedCount = 0;
+            const ENTRIES_PER_PAGE = 10;
+            
             async function loadUpdates() {
+                const loader = new LoadingManager('updates-container');
+                loader.show();
+                
                 try {
                     const response = await fetch('data/updates.json');
-                    const entries = await response.json();
-                    
-                    const container = document.getElementById('updates-container');
-                    let html = '';
-                    
-                    // Group entries by date
-                    const byDate = {};
-                    entries.forEach(entry => {
-                        if (!byDate[entry.date]) {
-                            byDate[entry.date] = [];
-                        }
-                        byDate[entry.date].push(entry);
-                    });
-                    
-                    // Sort dates in descending order (newest first)
-                    const sortedDates = Object.keys(byDate).sort().reverse();
-                    
-                    // Render each date group
-                    sortedDates.forEach(date => {
-                        const updates = byDate[date];
-                        
-                        // Parse date for display
-                        let displayDate = '';
-                        let displayMonthYear = '';
-                        
-                        const [year, month, day] = date.split('-');
-                        const monthNames = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                        displayDate = parseInt(day);
-                        displayMonthYear = monthNames[parseInt(month)] + ' ' + year;
-                        
-                        // Build the day container
-                        html += `
-                <div class="ud_info">
-                    <div class="ud_left">
-                        <div class="ud_date">${displayDate}</div>
-                        <div class="ud_monthyear">${displayMonthYear}</div>
-                    </div>
-                    <div class="ud_right">`;
-                        
-                        // Add all updates for this date
-                        updates.forEach(update => {
-                            html += `
-                        <div class="ud_text">
-                            <div class="ud_header">
-                                <p class="ud_cat">
-                                    ${update.cat}
-                                </p>
-                                <p class="ud_title">
-                                    ${update.title}
-                                </p>
-                            </div>
-                            <div class="ud_description">
-                                <p>
-                                    ${update.desc}
-                                </p>
-                            </div>
-                        </div>`;
-                        });
-                        
-                        html += `
-                    </div>
-                </div>`;
-                    });
-                    
-                    container.innerHTML = html;
+                    allEntries = await response.json();
+                    loader.hide();
+                    displayNextBatch();
                 } catch (error) {
                     console.error('Error loading updates:', error);
-                    document.getElementById('updates-container').innerHTML = 
-                        '<p>Error loading updates. Please try again later.</p>';
+                    loader.error('Error loading updates. Please try again later.');
                 }
             }
             
-            // Load updates when page loads
-            window.addEventListener('DOMContentLoaded', loadUpdates);
+            function displayNextBatch() {
+                const container = document.getElementById('updates-container');
+                const loadMoreContainer = document.getElementById('load-more-container');
+                
+                const endIndex = Math.min(displayedCount + ENTRIES_PER_PAGE, allEntries.length);
+                const batchEntries = allEntries.slice(displayedCount, endIndex);
+                
+                const byDate = {};
+                batchEntries.forEach(entry => {
+                    if (!byDate[entry.date]) {
+                        byDate[entry.date] = [];
+                    }
+                    byDate[entry.date].push(entry);
+                });
+                
+                const sortedDates = Object.keys(byDate).sort().reverse();
+                
+                let html = '';
+                sortedDates.forEach(date => {
+                    const updates = byDate[date];
+                    
+                    const [year, month, day] = date.split('-');
+                    const monthNames = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    const displayDate = day;
+                    const displayMonthYear = monthNames[parseInt(month)] + ' ' + year;
+                    
+                    html += `
+            <div class="ud_info">
+                <div class="ud_left">
+                    <div class="ud_date">${displayDate}</div>
+                    <div class="ud_monthyear">${displayMonthYear}</div>
+                </div>
+                <div class="ud_right">`;
+                    
+                    updates.forEach(update => {
+                        html += `
+                    <div class="ud_text">
+                        <div class="ud_header">
+                            <p class="ud_cat">${update.cat}</p>
+                            <p class="ud_title">${update.title}</p>
+                        </div>
+                        <div class="ud_description">
+                            <p>${update.desc}</p>
+                        </div>
+                    </div>`;
+                    });
+                    
+                    html += `
+                </div>
+            </div>`;
+                });
+                
+                if (displayedCount === 0) {
+                    container.innerHTML = html;
+                } else {
+                    container.insertAdjacentHTML('beforeend', html);
+                }
+                
+                displayedCount = endIndex;
+                
+                if (displayedCount < allEntries.length) {
+                    loadMoreContainer.style.display = 'block';
+                } else {
+                    loadMoreContainer.style.display = 'none';
+                }
+            }
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', displayNextBatch);
+                }
+                loadUpdates();
+            });
         </script>
     </body>
 </html>
