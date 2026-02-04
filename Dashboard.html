@@ -100,19 +100,11 @@
                         let displayDate = '';
                         let displayMonthYear = '';
                         
-                        if (date === '2025-00-00' || date === '2024-00-00') {
-                            displayDate = '00';
-                            displayMonthYear = date.split('-')[0];
-                        } else if (date.includes('-00-')) {
-                            displayDate = '00';
-                            displayMonthYear = 'End of Fall 24';
-                        } else {
-                            const [year, month, day] = date.split('-');
-                            const monthNames = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                                              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                            displayDate = parseInt(day);
-                            displayMonthYear = monthNames[parseInt(month)] + ' ' + year;
-                        }
+                        const [year, month, day] = date.split('-');
+                        const monthNames = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        displayDate = parseInt(day);
+                        displayMonthYear = monthNames[parseInt(month)] + ' ' + year;
                         
                         // Build the day container
                         html += `
