@@ -3,60 +3,25 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Log - Raymond Fong How</title>
-        
-        <link rel="stylesheet" href="static/css/style-general.css">
-        <link rel="stylesheet" href="static/css/style-fonts.css">
-        <link rel="stylesheet" href="static/css/style-nav.css">
-        <link rel="stylesheet" href="static/css/style-intro.css">
-        <link rel="stylesheet" href="static/css/style-coming_soon.css">
-        <link rel="stylesheet" href="static/css/style-dashboard.css">
-        <link rel="stylesheet" href="static/css/style-update.css">
-        <link rel="stylesheet" href="static/css/style-category_update.css">
-        <link rel="stylesheet" href="static/css/style-cat_list.css">
-        
-        <style>
-            .load-more-container {
-                text-align: center;
-                padding: 40px 20px;
-            }
-            
-            .load-more-btn {
-                background: rgba(255, 255, 255, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                color: #fff;
-                padding: 12px 30px;
-                font-size: 14px;
-                cursor: pointer;
-                border-radius: 4px;
-                transition: all 0.3s ease;
-            }
-            
-            .load-more-btn:hover {
-                background: rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.5);
-            }
-        </style>
+        <title>Category - Log - Raymond Fong How</title>
+        <script src="styles.js"></script>
     </head>
     <body>
-        <header>
-            <!-- Navbar will be injected by navbar.js -->
-        </header>
+        <header></header>
         
         <main class="dashboard_main">
             <section class="page_blank"></section>
             <section class="page_title">
                 <p id="category-title">Loading...</p>
             </section>
-            <section class="ud_list" id="updates-container">
-                <!-- Updates will be loaded here -->
-            </section>
+            <section class="ud_list" id="updates-container"></section>
             <div class="load-more-container" id="load-more-container" style="display: none;">
                 <button class="load-more-btn" id="load-more-btn">Load More</button>
             </div>
         </main>
 
         <script src="navbar.js"></script>
+        <script src="footer.js"></script>
         <script src="loading.js"></script>
         <script>
             const urlParams = new URLSearchParams(window.location.search);

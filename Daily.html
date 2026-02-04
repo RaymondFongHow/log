@@ -4,163 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Daily - Log - Raymond Fong How</title>
-        
-        <link rel="stylesheet" href="static/css/style-general.css">
-        <link rel="stylesheet" href="static/css/style-fonts.css">
-        <link rel="stylesheet" href="static/css/style-nav.css">
-        <link rel="stylesheet" href="static/css/style-intro.css">
-        <link rel="stylesheet" href="static/css/style-coming_soon.css">
-        <link rel="stylesheet" href="static/css/style-dashboard.css">
-        <link rel="stylesheet" href="static/css/style-update.css">
-        <link rel="stylesheet" href="static/css/style-category_update.css">
-        <link rel="stylesheet" href="static/css/style-cat_list.css">
-        
-        <style>
-            /* Instagram-ready screenshot area */
-            .daily-screenshot-area {
-                max-width: 100%;
-                margin: 0 auto;
-                padding: 0;
-                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            }
-            
-            .daily-card {
-                padding: 60px 40px;
-                text-align: center;
-                color: #fff;
-            }
-            
-            .daily-streak {
-                font-size: 48px;
-                font-weight: bold;
-                margin-bottom: 10px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
-            
-            .daily-date {
-                font-size: 18px;
-                color: rgba(255, 255, 255, 0.7);
-                margin-bottom: 40px;
-            }
-            
-            .daily-section {
-                margin-bottom: 40px;
-            }
-            
-            .daily-section-title {
-                font-size: 14px;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                color: rgba(255, 255, 255, 0.5);
-                margin-bottom: 15px;
-            }
-            
-            .daily-items {
-                font-size: 16px;
-                line-height: 1.8;
-                color: rgba(255, 255, 255, 0.9);
-            }
-            
-            .daily-items-line {
-                margin-bottom: 8px;
-            }
-            
-            /* History section below screenshot area */
-            .daily-history {
-                max-width: 900px;
-                margin: 0 auto;
-                padding: 60px 40px;
-            }
-            
-            .daily-history-title {
-                font-size: 24px;
-                font-weight: bold;
-                margin-bottom: 40px;
-                text-align: center;
-            }
-            
-            .daily-history-card {
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 8px;
-                padding: 30px;
-                margin-bottom: 20px;
-                transition: all 0.3s ease;
-            }
-            
-            .daily-history-card:hover {
-                background: rgba(255, 255, 255, 0.08);
-                border-color: rgba(255, 255, 255, 0.2);
-            }
-            
-            .daily-history-date {
-                font-size: 14px;
-                color: rgba(255, 255, 255, 0.5);
-                margin-bottom: 15px;
-            }
-            
-            .daily-history-content {
-                font-size: 15px;
-                line-height: 1.6;
-                color: rgba(255, 255, 255, 0.8);
-            }
-            
-            .load-more-container {
-                text-align: center;
-                padding: 40px 20px;
-            }
-            
-            .load-more-btn {
-                background: rgba(255, 255, 255, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                color: #fff;
-                padding: 12px 30px;
-                font-size: 14px;
-                cursor: pointer;
-                border-radius: 4px;
-                transition: all 0.3s ease;
-            }
-            
-            .load-more-btn:hover {
-                background: rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.5);
-            }
-            
-            @media (max-width: 768px) {
-                .daily-card {
-                    padding: 40px 20px;
-                }
-                
-                .daily-streak {
-                    font-size: 36px;
-                }
-                
-                .daily-history {
-                    padding: 40px 20px;
-                }
-            }
-        </style>
+        <script src="styles.js"></script>
     </head>
     <body>
-        <header>
-            <!-- Navbar will be injected by navbar.js -->
-        </header>
+        <header></header>
         
         <main>
-            <!-- Instagram-ready screenshot area -->
-            <section class="daily-screenshot-area" id="screenshot-area">
+            <!-- Instagram-ready screenshot area - FULL VIEWPORT HEIGHT -->
+            <section class="daily-screenshot-area">
                 <div class="daily-card">
                     <div class="daily-streak" id="streak-display">DAY —</div>
                     <div class="daily-date" id="today-date">Loading...</div>
                     
                     <div class="daily-section">
-                        <div class="daily-section-title">Today's Work</div>
-                        <div class="daily-items" id="today-work">
-                            Loading...
-                        </div>
+                        <div class="daily-section-title">TODAY'S WORK</div>
+                        <div class="daily-items" id="today-work">Loading...</div>
                     </div>
                 </div>
             </section>
@@ -168,9 +26,7 @@
             <!-- Previous days history -->
             <section class="daily-history">
                 <div class="daily-history-title">Previous Days</div>
-                <div id="history-container">
-                    <!-- Previous days will be loaded here -->
-                </div>
+                <div id="history-container"></div>
                 <div class="load-more-container" id="load-more-container" style="display: none;">
                     <button class="load-more-btn" id="load-more-btn">Load More</button>
                 </div>
@@ -178,18 +34,130 @@
         </main>
 
         <script src="navbar.js"></script>
+        <script src="footer.js"></script>
         <script src="loading.js"></script>
+        
+        <style>
+            /* Screenshot area - FULL VIEWPORT */
+            .daily-screenshot-area {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #000;
+                position: relative;
+            }
+            
+            .daily-card {
+                width: 100%;
+                max-width: 600px;
+                padding: 60px 40px;
+                text-align: center;
+                color: #fff;
+            }
+            
+            .daily-streak {
+                font-size: 48px;
+                font-weight: 200;
+                margin-bottom: 10px;
+                letter-spacing: 4px;
+            }
+            
+            .daily-date {
+                font-size: 16px;
+                font-weight: 300;
+                color: rgba(255, 255, 255, 0.6);
+                margin-bottom: 60px;
+                letter-spacing: 1px;
+            }
+            
+            .daily-section {
+                margin-bottom: 40px;
+            }
+            
+            .daily-section-title {
+                font-size: 11px;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: rgba(255, 255, 255, 0.4);
+                margin-bottom: 20px;
+            }
+            
+            .daily-items {
+                font-size: 17px;
+                font-weight: 300;
+                line-height: 1.9;
+                color: rgba(255, 255, 255, 0.9);
+            }
+            
+            .daily-items-line {
+                margin-bottom: 12px;
+            }
+            
+            /* History section */
+            .daily-history {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 80px 40px;
+                background: #000;
+            }
+            
+            .daily-history-title {
+                font-size: 20px;
+                font-weight: 300;
+                letter-spacing: 2px;
+                margin-bottom: 50px;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.8);
+            }
+            
+            .daily-history-date {
+                font-size: 12px;
+                font-weight: 300;
+                color: rgba(255, 255, 255, 0.4);
+                margin-bottom: 15px;
+                letter-spacing: 1px;
+            }
+            
+            .load-more-container {
+                text-align: center;
+                padding: 50px 20px;
+            }
+            
+            @media (max-width: 768px) {
+                .daily-card {
+                    padding: 40px 25px;
+                }
+                
+                .daily-streak {
+                    font-size: 40px;
+                }
+                
+                .daily-date {
+                    font-size: 15px;
+                }
+                
+                .daily-history {
+                    padding: 60px 20px;
+                }
+                
+                .daily-history-title {
+                    font-size: 18px;
+                }
+            }
+        </style>
+        
         <script>
             let allEntries = [];
             let displayedHistoryCount = 0;
             const HISTORY_PER_PAGE = 5;
-            const STREAK_START_DATE = '2025-02-03'; // You can change this!
+            const STREAK_START_DATE = '2025-02-03';
             
             async function loadDaily() {
                 try {
                     const response = await fetch('data/updates.json');
                     allEntries = await response.json();
-                    
                     displayToday();
                     displayHistoryBatch();
                 } catch (error) {
@@ -209,25 +177,21 @@
                 const today = new Date();
                 const todayStr = today.toISOString().split('T')[0];
                 
-                // Set streak
                 const streakDays = calculateStreak();
                 document.getElementById('streak-display').textContent = `DAY ${streakDays}`;
                 
-                // Set date
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 document.getElementById('today-date').textContent = today.toLocaleDateString('en-US', options);
                 
-                // Get today's entries
                 const todayEntries = allEntries.filter(entry => entry.date === todayStr);
                 
                 if (todayEntries.length > 0) {
                     let workHTML = '';
                     todayEntries.forEach(entry => {
-                        // Strip HTML tags for cleaner display
                         const cleanDesc = entry.desc.replace(/<br><br>/g, ' ').replace(/#\w+/g, '').trim();
                         workHTML += `<div class="daily-items-line"><strong>${entry.cat}:</strong> ${entry.title}</div>`;
                         if (cleanDesc) {
-                            workHTML += `<div class="daily-items-line" style="font-size: 14px; opacity: 0.8;">${cleanDesc}</div>`;
+                            workHTML += `<div class="daily-items-line" style="font-size: 15px; opacity: 0.7;">${cleanDesc}</div>`;
                         }
                     });
                     document.getElementById('today-work').innerHTML = workHTML;
@@ -240,11 +204,9 @@
                 const container = document.getElementById('history-container');
                 const loadMoreContainer = document.getElementById('load-more-container');
                 
-                // Skip today's entry
                 const today = new Date().toISOString().split('T')[0];
                 const historyEntries = allEntries.filter(entry => entry.date !== today);
                 
-                // Group by date
                 const byDate = {};
                 historyEntries.forEach(entry => {
                     if (!byDate[entry.date]) {
@@ -267,9 +229,9 @@
                     let content = '';
                     entries.forEach(entry => {
                         const cleanDesc = entry.desc.replace(/<br><br>/g, ' ').replace(/#\w+/g, '').trim();
-                        content += `<div style="margin-bottom: 10px;"><strong>${entry.cat}:</strong> ${entry.title}`;
+                        content += `<div style="margin-bottom: 12px;"><strong>${entry.cat}:</strong> ${entry.title}`;
                         if (cleanDesc) {
-                            content += `<div style="font-size: 13px; opacity: 0.7; margin-top: 5px;">${cleanDesc}</div>`;
+                            content += `<div style="font-size: 15px; opacity: 0.6; margin-top: 6px; font-weight: 300;">${cleanDesc}</div>`;
                         }
                         content += `</div>`;
                     });

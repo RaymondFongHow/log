@@ -1,4 +1,4 @@
-// Shared navbar component - loaded by all pages
+// Shared navbar component with hamburger menu for mobile
 function createNavbar(activePage) {
     const navHTML = `
         <nav class="navbar">
@@ -16,44 +16,81 @@ function createNavbar(activePage) {
                 </div>
             </a>
             <div class="nav_blank"></div>
-            <div class="nav_opt">
-                <div class="${activePage === 'dashboard' ? 'nav-active' : ''}">
-                    <a href="Dashboard.html">
-                        <p>Dashboard</p>
-                    </a>
+            
+            <!-- Desktop nav -->
+            <div class="nav_desktop">
+                <div class="nav_opt ${activePage === 'dashboard' ? 'nav-active' : ''}">
+                    <a href="Dashboard.html"><p>Dashboard</p></a>
+                </div>
+                <div class="nav_opt ${activePage === 'fields' ? 'nav-active' : ''}">
+                    <a href="Fields.html"><p>Fields</p></a>
+                </div>
+                <div class="nav_opt ${activePage === 'daily' ? 'nav-active' : ''}">
+                    <a href="Daily.html"><p>Daily</p></a>
+                </div>
+                <div class="nav_opt ${activePage === 'about' ? 'nav-active' : ''}">
+                    <a href="About Me.html"><p>About Me</p></a>
                 </div>
             </div>
-            <div class="nav_opt">
-                <div class="${activePage === 'fields' ? 'nav-active' : ''}">
-                    <a href="Fields.html">
-                        <p>Fields</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav_opt">
-                <div class="${activePage === 'daily' ? 'nav-active' : ''}">
-                    <a href="Daily.html">
-                        <p>Daily</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav_opt">
-                <div class="${activePage === 'about' ? 'nav-active' : ''}">
-                    <a href="About Me.html">
-                        <p>About Me</p>
-                    </a>
-                </div>
+            
+            <!-- Mobile hamburger -->
+            <div class="nav_hamburger">
+                <button class="hamburger-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </nav>
+        
+        <!-- Mobile menu overlay -->
+        <div class="mobile-menu">
+            <div class="mobile-menu-content">
+                <a href="Dashboard.html" class="${activePage === 'dashboard' ? 'active' : ''}">Dashboard</a>
+                <a href="Fields.html" class="${activePage === 'fields' ? 'active' : ''}">Fields</a>
+                <a href="Daily.html" class="${activePage === 'daily' ? 'active' : ''}">Daily</a>
+                <a href="About Me.html" class="${activePage === 'about' ? 'active' : ''}">About Me</a>
+            </div>
+        </div>
     `;
     
-    // Insert navbar into the header
     const header = document.querySelector('header');
     if (header) {
         header.insertAdjacentHTML('beforeend', navHTML);
     }
     
-    // Add scroll behavior
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+        
+        // Close menu when clicking a link
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+        
+        // Close menu when clicking overlay
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+    }
+    
+    // Scroll behavior
     const navEl = document.querySelector('.navbar');
     if (navEl) {
         window.addEventListener('scroll', () => {
@@ -66,7 +103,6 @@ function createNavbar(activePage) {
     }
 }
 
-// Auto-detect which page we're on based on URL
 function getActivePage() {
     const path = window.location.pathname;
     if (path.includes('Dashboard')) return 'dashboard';
@@ -76,7 +112,6 @@ function getActivePage() {
     return '';
 }
 
-// Initialize navbar when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     createNavbar(getActivePage());
 });
