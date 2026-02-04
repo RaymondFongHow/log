@@ -17,7 +17,13 @@ function createFooter() {
         </footer>
     `;
     
-    document.body.insertAdjacentHTML('beforeend', footerHTML);
+    // Find main or body and append after it
+    const main = document.querySelector('main');
+    if (main) {
+        main.insertAdjacentHTML('afterend', footerHTML);
+    } else {
+        document.body.insertAdjacentHTML('beforeend', footerHTML);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', createFooter);
