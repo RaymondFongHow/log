@@ -1,5 +1,11 @@
 [
   {
+    "date": "2025-02-05",
+    "cat": "Web Development",
+    "title": "Log System V2.0.5 - Complete Rebuild",
+    "desc": "Full website overhaul: Python→JavaScript migration, hamburger menu, Instagram Daily page, shared components, pagination, sharp minimal design. Production ready."
+  }
+  {
     "date": "2025-02-04",
     "cat": "Mathematics",
     "title": "MATH 2551",
