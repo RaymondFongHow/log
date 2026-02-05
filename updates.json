@@ -1,6 +1,12 @@
 [
   {
     "date": "2026-02-04",
+    "cat": "Industrial Engineering",
+    "title": "ISYE 3025 Quiz 3",
+    "desc": "Completed Quiz 3 for Engineering Economy course."
+  },
+  {
+    "date": "2026-02-04",
     "cat": "Web Development",
     "title": "Log System V2.0.5 - Complete Rebuild",
     "desc": "Full website overhaul: Python→JavaScript migration, hamburger menu, Instagram Daily page, shared components, pagination, sharp minimal design. Production ready."
