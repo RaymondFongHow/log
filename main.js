@@ -162,7 +162,7 @@ function renderCategorySpecific() {
 }
 
 function renderDaily() {
-    const todayEntry = getTodayEntry(state.allEntries);
+    const todayEntries = getTodayEntries(state.allEntries);
 
     const dateEl = document.getElementById('today-date');
     const workEl = document.getElementById('today-work');
@@ -180,7 +180,7 @@ function renderDaily() {
     }
 
     if (workEl) {
-        workEl.innerHTML = todayEntry?.desc || `<span class="muted">No log yet.</span>`;
+        workEl.innerHTML = buildTodayList(todayEntries);
     }
 
     if (streakEl) {
@@ -278,6 +278,11 @@ function getTodayEntry(entries) {
     return entries.find(entry => entry.date === todayKey) || null;
 }
 
+function getTodayEntries(entries) {
+    const todayKey = getTodayKey();
+    return entries.filter(entry => entry.date === todayKey);
+}
+
 function calculateStreak(entries) {
     if (!entries.length) return 0;
     const dateSet = new Set(entries.map(entry => entry.date));
@@ -292,6 +297,19 @@ function calculateStreak(entries) {
     }
 
     return count;
+}
+
+function buildTodayList(entries) {
+    if (!entries.length) {
+        return `<span class="muted">No log yet.</span>`;
+    }
+
+    const ordered = entries.slice().reverse();
+    const items = ordered
+        .map(entry => `<li>${entry.title || ''}</li>`)
+        .join('');
+
+    return `<ul class="daily-today-list">${items}</ul>`;
 }
 
 function buildDailyHistory(entries, limit) {
