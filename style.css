@@ -91,7 +91,7 @@ button {
     padding: 8px 24px;
     backdrop-filter: blur(8px);
     z-index: 1001;
-    transition: transform 0.35s ease, opacity 0.35s ease, background 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.7s ease, opacity 0.7s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar a {
@@ -299,10 +299,11 @@ button {
     height: 2px;
     background: #fff;
     transition: all 0.3s ease;
+    transform-origin: center;
 }
 
 .hamburger-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
+    transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger-btn.active span:nth-child(2) {
@@ -310,7 +311,7 @@ button {
 }
 
 .hamburger-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 .mobile-menu {
@@ -366,7 +367,7 @@ body.menu-open {
 .cat_ud_list {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 20px 50px;
+    padding: 0 28px 50px;
 }
 
 .ud_info {
@@ -423,6 +424,8 @@ body.menu-open {
     font-size: clamp(0.95rem, 2.2vw, 1.05rem);
     opacity: 0.85;
     font-weight: 300;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .ud_description p {
@@ -435,7 +438,7 @@ body.menu-open {
 .cat_list {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 20px 50px;
+    padding: 0 28px 50px;
 }
 
 .cat_link {
@@ -600,9 +603,12 @@ body.menu-open {
 }
 
 .daily-history-desc {
-    font-size: 0.95rem;
+    font-size: clamp(0.9rem, 2.1vw, 1rem);
     opacity: 0.75;
     line-height: 1.7;
+    font-weight: 300;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .daily-history-empty {
@@ -644,6 +650,10 @@ body.menu-open {
     .daily-card {
         padding: 60px 30px;
     }
+
+    .brand_text .tagline {
+        font-weight: 300;
+    }
 }
 
 @media (max-width: 900px) {
@@ -652,13 +662,13 @@ body.menu-open {
     .cat_list,
     .daily-history,
     .about-content {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 32px;
+        padding-right: 32px;
     }
 
     .daily-screenshot-area {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 32px;
+        padding-right: 32px;
     }
 }
 
@@ -668,13 +678,13 @@ body.menu-open {
     .cat_list,
     .daily-history,
     .about-content {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 28px;
+        padding-right: 28px;
     }
 
     .daily-screenshot-area {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 28px;
+        padding-right: 28px;
     }
 
     .daily-date {
