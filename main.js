@@ -180,10 +180,13 @@ function renderDaily() {
             month: 'short',
             day: 'numeric'
         }).formatToParts(activeDate);
-        const values = parts
-            .filter(part => part.type !== 'literal')
-            .map(part => part.value);
-        dateEl.innerText = values.join('  ');
+        const getPart = type => parts.find(part => part.type === type)?.value || '';
+        const weekday = getPart('weekday');
+        const month = getPart('month');
+        const day = getPart('day');
+        const year = getPart('year');
+        const separator = ', '; //'\u00A0\u00A0'
+        dateEl.innerText = `${weekday}${separator}${month} ${day}${separator}${year}`.trim();
     }
 
     if (workEl) {

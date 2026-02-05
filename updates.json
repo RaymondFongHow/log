@@ -85,13 +85,13 @@
   },
   {
     "date": "2024-10-31",
-    "cat": "Computer Science",
+    "cat": "Web Development",
     "title": "Development of <a href='https://log.raymondfonghow.com'>log.raymondfonghow.com</a>",
     "desc": "Automated construction of subject pages.<br><br>#python #html #css"
   },
   {
     "date": "2024-10-30",
-    "cat": "Computer Science",
+    "cat": "Web Development",
     "title": "SUCCESS!!!",
     "desc": "Abracadabra! Constructed a preliminary version of my very own learning logging site hosted at <a href='https://log.raymondfonghow.com'>log.raymondfonghow.com</a>!!!<br><br>#python #html #css #js #git"
   },
@@ -109,7 +109,7 @@
   },
   {
     "date": "2024-10-29",
-    "cat": "Computer Science",
+    "cat": "Web Development",
     "title": "Development of <a href='https://log.raymondfonghow.com'>log.raymondfonghow.com</a>",
     "desc": "Wrote my own version of webpage rendering kit.<br><br>#python #html #css"
   }
