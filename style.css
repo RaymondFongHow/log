@@ -135,7 +135,7 @@ button {
     border: 1px solid var(--border-color);
     padding: 80px 50px;
     width: 100%;
-    max-width: 680px;
+    max-width: 420px;
     text-align: center;
     background: #000;
 }
@@ -595,6 +595,13 @@ body.menu-open {
     border: 1px solid var(--border-color);
     padding: 24px;
     background: #000;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.daily-history-card:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: #0a0a0a;
 }
 
 .daily-history-date {
@@ -622,14 +629,6 @@ body.menu-open {
     margin: 4px 0 6px 0;
 }
 
-.daily-history-desc {
-    font-size: clamp(0.9rem, 2.1vw, 1rem);
-    opacity: 0.75;
-    line-height: 1.7;
-    font-weight: 300;
-    text-align: justify;
-    text-justify: inter-word;
-}
 
 .daily-history-empty {
     font-size: 0.9rem;

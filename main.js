@@ -2,7 +2,8 @@ const state = {
     pageType: document.body?.dataset?.page || '',
     category: null,
     allEntries: [],
-    visibleCount: 8
+    visibleCount: 8,
+    activeDateKey: ''
 };
 
 const PAGE_SIZE = 8;
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initUI() {
     if (state.pageType === 'daily') {
         state.visibleCount = 5;
+        state.activeDateKey = getDateFromUrl() || getTodayKey();
     }
     setupLoadMore();
     loadAppData();
@@ -162,35 +164,41 @@ function renderCategorySpecific() {
 }
 
 function renderDaily() {
-    const todayEntries = getTodayEntries(state.allEntries);
+    const activeDateKey = state.activeDateKey || getTodayKey();
+    const activeDate = parseDateKey(activeDateKey) || new Date();
+    const dateEntries = getEntriesForDate(state.allEntries, activeDateKey);
 
     const dateEl = document.getElementById('today-date');
     const workEl = document.getElementById('today-work');
     const streakEl = document.getElementById('today-streak-count');
     const historyEl = document.getElementById('daily-history');
 
-    const todayDate = new Date();
     if (dateEl) {
-        dateEl.innerText = todayDate.toLocaleDateString('en-US', {
+        const parts = new Intl.DateTimeFormat('en-US', {
             weekday: 'short',
             year: 'numeric',
             month: 'short',
             day: 'numeric'
-        });
+        }).formatToParts(activeDate);
+        const values = parts
+            .filter(part => part.type !== 'literal')
+            .map(part => part.value);
+        dateEl.innerText = values.join('  ');
     }
 
     if (workEl) {
-        workEl.innerHTML = buildTodayList(todayEntries);
+        workEl.innerHTML = buildDateList(dateEntries);
     }
 
     if (streakEl) {
-        streakEl.innerText = String(calculateStreak(state.allEntries));
+        streakEl.innerText = String(calculateStreak(state.allEntries, activeDateKey));
     }
 
     if (historyEl) {
-        const historyData = buildDailyHistory(state.allEntries, state.visibleCount);
+        const historyData = buildDailyHistory(state.allEntries, state.visibleCount, activeDateKey);
         historyEl.innerHTML = historyData.html;
         updateLoadMore(historyData.visibleCount, historyData.totalCount);
+        bindDailyHistoryClicks();
     }
 }
 
@@ -273,21 +281,25 @@ function getTodayKey() {
     return formatDateKey(new Date());
 }
 
-function getTodayEntry(entries) {
-    const todayKey = getTodayKey();
-    return entries.find(entry => entry.date === todayKey) || null;
+function getEntriesForDate(entries, dateKey) {
+    if (!dateKey) return [];
+    return entries.filter(entry => entry.date === dateKey);
 }
 
-function getTodayEntries(entries) {
-    const todayKey = getTodayKey();
-    return entries.filter(entry => entry.date === todayKey);
-}
-
-function calculateStreak(entries) {
+function calculateStreak(entries, anchorDateKey) {
     if (!entries.length) return 0;
     const dateSet = new Set(entries.map(entry => entry.date));
     let count = 0;
-    const current = new Date();
+    const current = parseDateKey(anchorDateKey) || new Date();
+    const todayKey = formatDateKey(current);
+
+    if (!dateSet.has(todayKey)) {
+        current.setDate(current.getDate() - 1);
+        const yesterdayKey = formatDateKey(current);
+        if (!dateSet.has(yesterdayKey)) {
+            return 0;
+        }
+    }
 
     while (true) {
         const key = formatDateKey(current);
@@ -299,7 +311,7 @@ function calculateStreak(entries) {
     return count;
 }
 
-function buildTodayList(entries) {
+function buildDateList(entries) {
     if (!entries.length) {
         return `<span class="muted">No log yet.</span>`;
     }
@@ -312,9 +324,8 @@ function buildTodayList(entries) {
     return `<ul class="daily-today-list">${items}</ul>`;
 }
 
-function buildDailyHistory(entries, limit) {
-    const todayKey = getTodayKey();
-    const historyEntries = entries.filter(entry => entry.date !== todayKey);
+function buildDailyHistory(entries, limit, excludeDateKey) {
+    const historyEntries = entries.filter(entry => entry.date !== excludeDateKey);
     const groups = groupByDate(historyEntries);
     const visibleGroups = groups.slice(0, limit);
 
@@ -335,14 +346,13 @@ function buildDailyHistory(entries, limit) {
                         <div class="daily-history-item">
                             <div class="daily-history-cat">${item.cat || ''}</div>
                             <div class="daily-history-item-title">${item.title || ''}</div>
-                            <div class="daily-history-desc">${item.desc || ''}</div>
                         </div>
                     `;
                 })
                 .join('');
 
             return `
-                <div class="daily-history-card">
+                <div class="daily-history-card" data-date="${group.date}">
                     <div class="daily-history-date">${dateLabel}</div>
                     ${itemsHtml}
                 </div>
@@ -358,13 +368,21 @@ function buildDailyHistory(entries, limit) {
 }
 
 function formatFullDate(dateStr) {
-    const dateObj = new Date(dateStr);
+    const dateObj = parseDateKey(dateStr);
     if (Number.isNaN(dateObj.getTime())) return dateStr || '';
     return dateObj.toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric'
     });
+}
+
+function parseDateKey(dateKey) {
+    if (!dateKey) return new Date(NaN);
+    const parts = dateKey.split('-').map(Number);
+    if (parts.length !== 3) return new Date(NaN);
+    const [year, month, day] = parts;
+    return new Date(year, month - 1, day);
 }
 
 function formatDateKey(dateObj) {
@@ -384,6 +402,31 @@ function updateLoadMore(visibleCount, totalCount) {
     } else {
         btn.style.display = 'none';
     }
+}
+
+function bindDailyHistoryClicks() {
+    const cards = document.querySelectorAll('.daily-history-card[data-date]');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const dateKey = card.getAttribute('data-date');
+            if (!dateKey) return;
+            state.activeDateKey = dateKey;
+            updateDateParam(dateKey);
+            renderDaily();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+}
+
+function updateDateParam(dateKey) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('date', dateKey);
+    window.history.replaceState({}, '', url.toString());
+}
+
+function getDateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('date') || '';
 }
 
 function getCategoryFromUrl() {

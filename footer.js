@@ -1,6 +1,6 @@
 // Shared footer component
 function createFooter() {
-    const version = '2.0.6';
+    const version = '2.1.3';
     const lastUpdated = new Date().toLocaleDateString('en-US', { 
         year: 'numeric', 
         month: 'short', 
