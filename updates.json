@@ -1,6 +1,6 @@
 [
   {
-    "date": "2026-02-05",
+    "date": "2026-02-04",
     "cat": "Web Development",
     "title": "Log System V2.0.5 - Complete Rebuild",
     "desc": "Full website overhaul: Python→JavaScript migration, hamburger menu, Instagram Daily page, shared components, pagination, sharp minimal design. Production ready."
