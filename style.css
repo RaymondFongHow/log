@@ -84,15 +84,14 @@ button {
     top: 0;
     left: 0;
     right: 0;
-    height: 64px;
+    min-height: 72px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 20;
+    padding: 8px 24px;
+    backdrop-filter: blur(8px);
+    z-index: 1001;
+    transition: transform 0.35s ease, opacity 0.35s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar a {
@@ -174,7 +173,7 @@ button {
 /* Load More Button */
 #load-more-btn {
     background: none; border: 1px solid var(--border-color); color: #fff;
-    padding: 12px 40px; cursor: pointer; transition: 0.3s; margin-top: 20px;
+    padding: 12px 40px; cursor: pointer; transition: 0.3s; margin-top: 12px;
     font-weight: 300;
     font-size: 0.8rem;
     letter-spacing: 1px;
@@ -186,19 +185,25 @@ button {
    NAVBAR DETAILS + HAMBURGER
    ======================================== */
 .navbar {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
-    border-bottom: none;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 -1px rgba(255, 255, 255, 0.08);
 }
 
 .navbar-scrolled {
-    background: rgba(0, 0, 0, 0.9);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.4), inset 0 -1px rgba(255, 255, 255, 0.12);
+}
+
+.navbar-hidden {
+    transform: translateY(-120%);
+    opacity: 0;
 }
 
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 4px 0;
     text-decoration: none;
     border-bottom: none;
     color: inherit;
@@ -227,13 +232,14 @@ button {
 }
 
 .brand_text .title {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 300;
     margin: 0;
 }
 
 .brand_text .tagline {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
+    font-weight: 200;
     opacity: 0.7;
     margin: 0;
 }
@@ -272,6 +278,8 @@ button {
 
 .nav_hamburger {
     display: none;
+    position: relative;
+    z-index: 1002;
 }
 
 .hamburger-btn {
@@ -282,6 +290,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    z-index: 1002;
 }
 
 .hamburger-btn span {
@@ -357,7 +366,7 @@ body.menu-open {
 .cat_ud_list {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 0 20px 50px;
 }
 
 .ud_info {
@@ -426,7 +435,7 @@ body.menu-open {
 .cat_list {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 0 20px 50px;
 }
 
 .cat_link {
@@ -499,10 +508,47 @@ body.menu-open {
 }
 
 /* ========================================
+   INDEX INTRO
+   ======================================== */
+.index-hero {
+    height: 100vh;
+    position: relative;
+}
+
+.index-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.index-entry {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.index-entry h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 100;
+    margin: 0 0 14px 0;
+}
+
+.index-entry a {
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ========================================
    DAILY HISTORY (Horizontal Cards)
    ======================================== */
 .daily-history {
-    padding: 60px 20px 80px;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
 }
 
 .daily-history-title {
@@ -516,20 +562,16 @@ body.menu-open {
 
 .daily-history-track {
     display: flex;
+    flex-direction: column;
     gap: 18px;
-    overflow-x: auto;
-    padding: 10px 4px 20px;
-    scroll-snap-type: x mandatory;
+    padding: 10px 0 10px;
 }
 
 .daily-history-card {
-    min-width: 260px;
-    max-width: 320px;
-    flex: 0 0 auto;
+    width: 100%;
     border: 1px solid var(--border-color);
-    padding: 20px;
-    background: #0a0a0a;
-    scroll-snap-align: start;
+    padding: 24px;
+    background: #000;
 }
 
 .daily-history-date {
@@ -557,9 +599,10 @@ body.menu-open {
     margin: 4px 0 6px 0;
 }
 
-.daily-history-summary {
-    font-size: 0.85rem;
-    opacity: 0.7;
+.daily-history-desc {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    line-height: 1.7;
 }
 
 .daily-history-empty {
@@ -581,9 +624,8 @@ body.menu-open {
     }
 
     .navbar {
-        height: 58px;
+        min-height: 64px;
         padding: 0 18px;
-        background: rgba(0, 0, 0, 0.95);
     }
 
     .page_title {
@@ -604,18 +646,43 @@ body.menu-open {
     }
 }
 
+@media (max-width: 900px) {
+    .page_title,
+    .ud_list,
+    .cat_list,
+    .daily-history,
+    .about-content {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .daily-screenshot-area {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
 @media (max-width: 520px) {
     .page_title,
     .ud_list,
     .cat_list,
     .daily-history,
     .about-content {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
     }
 
     .daily-screenshot-area {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .daily-date {
+        font-size: 1.2rem;
+        line-height: 1.25;
+        max-width: 22ch;
+        margin-left: auto;
+        margin-right: auto;
+        text-wrap: balance;
     }
 }

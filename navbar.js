@@ -71,6 +71,8 @@ function createNavbar(activePage) {
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
             document.body.classList.toggle('menu-open');
+            const navEl = document.querySelector('.navbar');
+            if (navEl) navEl.classList.remove('navbar-hidden');
         });
         
         // Close menu when clicking a link
@@ -96,11 +98,35 @@ function createNavbar(activePage) {
     // Scroll behavior
     const navEl = document.querySelector('.navbar');
     if (navEl) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY >= 200) {
-                navEl.classList.add("navbar-scrolled");
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        const updateNav = () => {
+            const current = window.scrollY;
+            const isMenuOpen = document.body.classList.contains('menu-open');
+
+            if (current > 20) {
+                navEl.classList.add('navbar-scrolled');
             } else {
-                navEl.classList.remove("navbar-scrolled");
+                navEl.classList.remove('navbar-scrolled');
+            }
+
+            if (!isMenuOpen) {
+                if (current > lastScrollY && current > 120) {
+                    navEl.classList.add('navbar-hidden');
+                } else {
+                    navEl.classList.remove('navbar-hidden');
+                }
+            }
+
+            lastScrollY = current;
+            ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateNav);
+                ticking = true;
             }
         });
     }

@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initUI() {
+    if (state.pageType === 'daily') {
+        state.visibleCount = 5;
+    }
     setupLoadMore();
     loadAppData();
 }
@@ -71,8 +74,9 @@ function showLoading(container) {
 
 function ensureMinLoadTime(startTime) {
     const elapsed = performance.now() - startTime;
-    if (elapsed >= 10) return Promise.resolve();
-    const waitMs = Math.max(1000 - elapsed, 0);
+    if (elapsed < 5) return Promise.resolve();
+    if (elapsed >= 500) return Promise.resolve();
+    const waitMs = Math.max(500 - elapsed, 0);
     return new Promise(resolve => setTimeout(resolve, waitMs));
 }
 
@@ -90,6 +94,8 @@ function renderCurrentPage() {
         renderUpdates();
     } else if (state.pageType === 'category') {
         renderCategorySpecific();
+    } else if (state.pageType === 'daily') {
+        renderDaily();
     }
 }
 
@@ -182,7 +188,9 @@ function renderDaily() {
     }
 
     if (historyEl) {
-        historyEl.innerHTML = buildDailyHistory(state.allEntries);
+        const historyData = buildDailyHistory(state.allEntries, state.visibleCount);
+        historyEl.innerHTML = historyData.html;
+        updateLoadMore(historyData.visibleCount, historyData.totalCount);
     }
 }
 
@@ -286,26 +294,30 @@ function calculateStreak(entries) {
     return count;
 }
 
-function buildDailyHistory(entries) {
+function buildDailyHistory(entries, limit) {
     const todayKey = getTodayKey();
     const historyEntries = entries.filter(entry => entry.date !== todayKey);
-    const groups = groupByDate(historyEntries).slice(0, 10);
+    const groups = groupByDate(historyEntries);
+    const visibleGroups = groups.slice(0, limit);
 
     if (!groups.length) {
-        return `<div class="daily-history-empty">No previous logs yet.</div>`;
+        return {
+            html: `<div class="daily-history-empty">No previous logs yet.</div>`,
+            visibleCount: 0,
+            totalCount: 0
+        };
     }
 
-    return groups
+    const html = visibleGroups
         .map(group => {
             const dateLabel = formatFullDate(group.date);
             const itemsHtml = group.items
                 .map(item => {
-                    const summary = summarizeText(item.desc || '');
                     return `
                         <div class="daily-history-item">
                             <div class="daily-history-cat">${item.cat || ''}</div>
                             <div class="daily-history-item-title">${item.title || ''}</div>
-                            <div class="daily-history-summary">${summary}</div>
+                            <div class="daily-history-desc">${item.desc || ''}</div>
                         </div>
                     `;
                 })
@@ -319,6 +331,12 @@ function buildDailyHistory(entries) {
             `;
         })
         .join('');
+
+    return {
+        html,
+        visibleCount: visibleGroups.length,
+        totalCount: groups.length
+    };
 }
 
 function formatFullDate(dateStr) {
@@ -338,11 +356,6 @@ function formatDateKey(dateObj) {
     return `${year}-${month}-${day}`;
 }
 
-function summarizeText(htmlString) {
-    const text = htmlString.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-    if (text.length <= 140) return text;
-    return `${text.slice(0, 140)}...`;
-}
 
 function updateLoadMore(visibleCount, totalCount) {
     const btn = document.getElementById('load-more-btn');
