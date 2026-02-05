@@ -23,6 +23,7 @@ async function loadAppData() {
     if (pageType === 'about' || pageType === 'index') return;
 
     const container = document.getElementById('content-wrap');
+    const loadStart = performance.now();
     showLoading(container);
 
     try {
@@ -30,6 +31,7 @@ async function loadAppData() {
         if (!res.ok) throw new Error('JSON missing');
         const data = await res.json();
         state.allEntries = normalizeEntries(data);
+        await ensureMinLoadTime(loadStart);
 
         if (pageType === 'dashboard') {
             updatePageTitle('Dashboard');
@@ -65,6 +67,13 @@ function showLoading(container) {
             <p>Loading...</p>
         </div>
     `;
+}
+
+function ensureMinLoadTime(startTime) {
+    const elapsed = performance.now() - startTime;
+    if (elapsed >= 10) return Promise.resolve();
+    const waitMs = Math.max(1000 - elapsed, 0);
+    return new Promise(resolve => setTimeout(resolve, waitMs));
 }
 
 function setupLoadMore() {
@@ -147,15 +156,16 @@ function renderCategorySpecific() {
 }
 
 function renderDaily() {
-    const today = state.allEntries[0];
-    if (!today) return;
+    const todayEntry = getTodayEntry(state.allEntries);
 
     const dateEl = document.getElementById('today-date');
     const workEl = document.getElementById('today-work');
+    const streakEl = document.getElementById('today-streak-count');
+    const historyEl = document.getElementById('daily-history');
 
+    const todayDate = new Date();
     if (dateEl) {
-        const dateObj = new Date(today.date);
-        dateEl.innerText = dateObj.toLocaleDateString('en-US', {
+        dateEl.innerText = todayDate.toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
@@ -163,7 +173,17 @@ function renderDaily() {
         });
     }
 
-    if (workEl) workEl.innerHTML = today.desc || '';
+    if (workEl) {
+        workEl.innerHTML = todayEntry?.desc || `<span class="muted">No log yet.</span>`;
+    }
+
+    if (streakEl) {
+        streakEl.innerText = String(calculateStreak(state.allEntries));
+    }
+
+    if (historyEl) {
+        historyEl.innerHTML = buildDailyHistory(state.allEntries);
+    }
 }
 
 function buildUpdatesHTML(entries) {
@@ -239,6 +259,89 @@ function formatDateParts(dateStr) {
             year: 'numeric'
         })
     };
+}
+
+function getTodayKey() {
+    return formatDateKey(new Date());
+}
+
+function getTodayEntry(entries) {
+    const todayKey = getTodayKey();
+    return entries.find(entry => entry.date === todayKey) || null;
+}
+
+function calculateStreak(entries) {
+    if (!entries.length) return 0;
+    const dateSet = new Set(entries.map(entry => entry.date));
+    let count = 0;
+    const current = new Date();
+
+    while (true) {
+        const key = formatDateKey(current);
+        if (!dateSet.has(key)) break;
+        count += 1;
+        current.setDate(current.getDate() - 1);
+    }
+
+    return count;
+}
+
+function buildDailyHistory(entries) {
+    const todayKey = getTodayKey();
+    const historyEntries = entries.filter(entry => entry.date !== todayKey);
+    const groups = groupByDate(historyEntries).slice(0, 10);
+
+    if (!groups.length) {
+        return `<div class="daily-history-empty">No previous logs yet.</div>`;
+    }
+
+    return groups
+        .map(group => {
+            const dateLabel = formatFullDate(group.date);
+            const itemsHtml = group.items
+                .map(item => {
+                    const summary = summarizeText(item.desc || '');
+                    return `
+                        <div class="daily-history-item">
+                            <div class="daily-history-cat">${item.cat || ''}</div>
+                            <div class="daily-history-item-title">${item.title || ''}</div>
+                            <div class="daily-history-summary">${summary}</div>
+                        </div>
+                    `;
+                })
+                .join('');
+
+            return `
+                <div class="daily-history-card">
+                    <div class="daily-history-date">${dateLabel}</div>
+                    ${itemsHtml}
+                </div>
+            `;
+        })
+        .join('');
+}
+
+function formatFullDate(dateStr) {
+    const dateObj = new Date(dateStr);
+    if (Number.isNaN(dateObj.getTime())) return dateStr || '';
+    return dateObj.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+}
+
+function formatDateKey(dateObj) {
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+function summarizeText(htmlString) {
+    const text = htmlString.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (text.length <= 140) return text;
+    return `${text.slice(0, 140)}...`;
 }
 
 function updateLoadMore(visibleCount, totalCount) {

@@ -7,7 +7,7 @@ function createNavbar(activePage) {
                     <img src="assets/images/common/logo-white.png" alt="LOGO">
                     <div class="brand_text">
                         <div>
-                            <p class="title">Log</p>
+                            <p class="title">Log 🪵</p>
                         </div>
                         <div>
                             <p class="tagline">Raymond Fong How</p>

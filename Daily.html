@@ -11,11 +11,18 @@
     <main>
         <section class="daily-screenshot-area">
             <div class="daily-card">
-                <div class="daily-streak">LOGGED ENTRY</div>
+                <div class="daily-streak">
+                    <div class="daily-streak-count" id="today-streak-count">0</div>
+                    <div class="daily-streak-label">DAY STREAK</div>
+                </div>
                 <div class="daily-date" id="today-date">...</div>
                 <div class="daily-label">Today's Work</div>
                 <div id="today-work"></div>
             </div>
+        </section>
+        <section class="daily-history">
+            <h2 class="daily-history-title">Previous Days</h2>
+            <div class="daily-history-track" id="daily-history"></div>
         </section>
         <div id="content-wrap" style="display:none;"></div>
     </main>
