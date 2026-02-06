@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-02-05",
+    "cat": "Physics",
+    "title": "PHYS 3143 HW 3",
+    "desc": "Completed Homework 3 for Quantum Mechanics 1 course."
+  },
+  {
+    "date": "2026-02-05",
+    "cat": "Industrial Engineering",
+    "title": "ISYE 3770 HW 2",
+    "desc": "Completed Homework 2 for Statistics and Applications course."
+  },
+  {
     "date": "2026-02-04",
     "cat": "Industrial Engineering",
     "title": "ISYE 3025 Quiz 3",
